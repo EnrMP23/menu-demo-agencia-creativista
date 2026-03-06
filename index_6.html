@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>· CAFÉ CON ACTITUD ·</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Poppins (títulos) y Playfair Display (detalles) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f5f2eb;  /* fondo cálido muy claro */
+            font-family: 'Poppins', sans-serif;
+            color: #2c2c2c;
+            line-height: 1.5;
+            padding: 2rem 1.5rem;
+        }
+
+        .menu {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 40px;
+            box-shadow: 0 25px 45px -20px rgba(0,0,0,0.2);
+            padding: 3rem 2.5rem;
+            border: 1px solid #f0e8dd;
+        }
+
+        /* HEADER CON PERSONALIDAD */
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .header h1 {
+            font-weight: 700;
+            font-size: 4rem;
+            letter-spacing: -2px;
+            color: #2f2f2f;
+            line-height: 1;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #3d3d3d, #6b4f3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: #a7896b;
+            margin-top: 0.3rem;
+            border-top: 1px dashed #d4b99b;
+            padding-top: 0.5rem;
+        }
+
+        .header .badge {
+            background-color: #d9b99b;
+            color: #2f2f2f;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            letter-spacing: 1px;
+            margin-top: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        /* NAVEGACIÓN CON ESTILO */
+        .nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid #ece1d5;
+            padding-bottom: 0.8rem;
+        }
+
+        .nav button {
+            background: none;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #6f5b4b;
+            cursor: pointer;
+            padding: 0.4rem 0;
+            transition: all 0.2s;
+            border-bottom: 2px solid transparent;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav button:hover {
+            color: #3d2f24;
+            border-bottom-color: #c7a17b;
+        }
+
+        /* GRID DE 3 COLUMNAS CON PERSONALIDAD */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        /* CADA CATEGORÍA */
+        .category {
+            break-inside: avoid;
+        }
+
+        .category-title {
+            font-weight: 600;
+            font-size: 1.5rem;
+            color: #3d2f24;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-left: 4px solid #c7a17b;
+            padding-left: 0.8rem;
+        }
+
+        .category-title i {
+            color: #c7a17b;
+            font-size: 1.2rem;
+        }
+
+        /* LISTA DE ITEMS */
+        .item-list {
+            list-style: none;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            border-bottom: 1px dotted #e0d6cc;
+            padding-bottom: 0.4rem;
+        }
+
+        .item-name {
+            font-weight: 500;
+            color: #3a3a3a;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .item-name i {
+            color: #bda185;
+            font-size: 0.8rem;
+            width: 1.2rem;
+            text-align: center;
+        }
+
+        .item-price {
+            font-weight: 600;
+            color: #7b5e47;
+            background: #f6ede5;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+        }
+
+        .item-desc {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 0.8rem;
+            color: #9b8a7a;
+            margin-bottom: 1rem;
+            margin-left: 1.7rem;
+        }
+
+        /* ALGUNOS DESTACADOS */
+        .item.featured .item-name {
+            font-weight: 700;
+            color: #4a3729;
+        }
+
+        .item.featured .item-price {
+            background-color: #d9b99b;
+            color: #2c2c2c;
+        }
+
+        /* SECCIÓN DE NOTAS */
+        .notes {
+            grid-column: span 3;
+            margin-top: 1.5rem;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #b7a087;
+            border-top: 1px dashed #d4b99b;
+            padding-top: 1.5rem;
+        }
+
+        .notes i {
+            color: #c7a17b;
+            margin: 0 0.3rem;
+        }
+
+        /* FOOTER CON ACTITUD */
+        .footer {
+            margin-top: 4rem;
+            text-align: center;
+            border-top: 2px solid #e2d2c2;
+            padding-top: 2rem;
+            color: #6f5b4b;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .footer .contact {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2.5rem;
+        }
+
+        .footer .social {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .footer a {
+            color: #7b5e47;
+            text-decoration: none;
+            border-bottom: 1px dotted #c7a17b;
+        }
+
+        .footer a:hover {
+            color: #4a3729;
+        }
+
+        .footer .signature {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #b3977e;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1000px) {
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .notes {
+                grid-column: span 2;
+            }
+            .header h1 {
+                font-size: 3.2rem;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            .notes {
+                grid-column: span 1;
+            }
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            .nav {
+                gap: 1rem;
+            }
+            .nav button {
+                font-size: 0.8rem;
+            }
+            .menu {
+                padding: 2rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="menu">
+        <!-- HEADER CON PERSONALIDAD -->
+        <div class="header">
+            <h1>the coffee</h1>
+            <p>para los que necesitan una razón para levantarse</p>
+            <div class="badge">especialidad · tostado propio</div>
+        </div>
+
+        <!-- NAVEGACIÓN CON ESTILO -->
+        <nav class="nav">
+            <button onclick="document.getElementById('cafe').scrollIntoView({behavior:'smooth'})">café</button>
+            <button onclick="document.getElementById('otros').scrollIntoView({behavior:'smooth'})">otros</button>
+            <button onclick="document.getElementById('desayunos').scrollIntoView({behavior:'smooth'})">desayunos</button>
+            <button onclick="document.getElementById('dulce').scrollIntoView({behavior:'smooth'})">dulce</button>
+            <button onclick="document.getElementById('sabroso').scrollIntoView({behavior:'smooth'})">sabroso</button>
+        </nav>
+
+        <!-- MENÚ EN 3 COLUMNAS -->
+        <div class="menu-grid">
+            <!-- COLUMNA 1: CAFÉ -->
+            <div class="category" id="cafe">
+                <h2 class="category-title"><i class="fas fa-mug-hot"></i> café</h2>
+                <ul class="item-list">
+                    <li class="item featured">
+                        <span class="item-name"><i class="fas fa-crown"></i>espresso</span>
+                        <span class="item-price">$2.80</span>
+                    </li>
+                    <div class="item-desc">30ml de pura energía · blend de la casa</div>
+                    <li class="item">
+                        <span class="item-name"><i class="fas fa-coffee"></i>americano</span>
+                        <span class="item-price">$3.20</span>
+                    </li>
+                    <div class="item-desc">espresso + agua caliente · para los que disfrutan</div>
+                    <li class="item">
+                        <span class="item-name"><i class="fas fa-coffee"></i>cappuccino</span>
+                        <span class="item-price">$4.00</span>
+                    </li>
+                    <div class="item-desc">espresso, leche, espuma · el clásico</div>
+                    <li class="item featured">
+                        <span class="item-name"><i class="fas fa-crown"></i>latte</span>
+                        <span class="item-price">$4.20</span>
+                    </li>
+                    <div class="item-desc">doble espresso, mucha leche · suave y potente</div>
+                    <li class="item">
+                        <span class="item-name"><i class="fas fa-coffee"></i>mocha</span>
+                        <span class="item-price">$4.50</span>
+                    </li>
+                    <div class="item-desc">con chocolate, crema batida · pecado</div>
+                    <li class="item">
+                        <span class="item-name"><i class="fas fa-coffee"></i>cold brew</span>
+                        <span class="item-price">$4.50</span>
+                    </li>
+                    <div class="item-desc">extracción fría 16h · sin amargor</div>
+                </ul>
+            </div>
+
+            <!-- COLUMNA 2: OTRAS BEBIDAS -->
+            <div class="category" id="otros">
+                <h2 class="category-title"><i class="fas fa-leaf"></i> otras bebidas</h2>
+                <ul class="item-list">
+                    <li class="item">
+                        <span class="item-name"><i class="fas fa-leaf"></i>earl grey</span>
+                        <span class="item-price">$3.00</span>
+                    </li>
+                    <div class="item-desc">té negro · bergamota</div>
+                    <li class="item">
+                        <span class="item-name"><i class="fas fa-leaf"></i>jazmín</span>
+                        <span class="item-price">$3.00</span>
+                    </li>
+                    <div class="item-desc">té verde · flores de jazmín</div>
+                    <li class="item featured">
+                        <span class="item-name"><i class="fas fa-crown"></i>matcha latte</span>
+                        <span class="item-price">$4.50</span>
+                    </li>
+                    <div class="item-desc">matcha ceremonial · leche de almendras</div>
+                    <li class="item">
+                        <span class="item-name"><i class="fas fa-leaf"></i>chai latte</span>
+                        <span class="item-price">$4.20</span>
+                    </li>
+                    <div class="item-desc">especias, leche, canela</div>
+                </ul>
+            </div>
+
+            <!-- COLUMNA 3: DESAYUNOS (PRIMERA PARTE) -->
+            <div class="category" id="desayunos">
+                <h2 class="category-title"><i class="fas fa-egg"></i> desayunos</h2>
+                <ul class="item-list">
+                    <li class="item featured">
+                        <span class="item-name"><i class="fas fa-crown"></i>huevos benedictinos</span>
+                        <span class="item-price">$8.50</span>
+                    </li>
+                    <div class="item-desc">pochados, holandesa, espinaca · pan de masa madre</div>
+                    <li class="item">
+                        <span class="item-name"><i class="fas fa-egg"></i>huevos al gusto</span>
+                        <span class="item-price">$6.00</span>
+                    </li>
+                    <div class="item-desc">revueltos, estrellados, en tortilla · con papas</div>
+                    <li class="item">
+                        <span class="item-name"><i class="fas fa-bread-slice"></i>tostadas francesas</span>
+                        <span class="item-price">$7.50</span>
+                    </li>
+                    <div class="item-desc">brioche, arce, frutas de temporada</div>
+                </ul>
+            </div>
+
+            <!-- COLUMNA 1 (segunda fila): DULCE -->
+            <div class="category" id="dulce">
+                <h2 class="category-title"><i class="fas fa-cake"></i> dulce</h2>
+                <ul class="item-list">
+                    <li class="item">
+                        <span class="item-name"><i class="fas fa-cake"></i>croissant</span>
+                        <span class="item-price">$3.00</span>
+                    </li>
+                    <div class="item-desc">mantequilla · hojaldrado</div>
+                    <li class="item featured">
+                        <span class="item-name"><i class="fas fa-crown"></i>croissant de chocolate</span>
+                        <span class="item-price">$3.50</span>
+                    </li>
+                    <div class="item-desc">dos barras de chocolate</div>
+                    <li class="item">
+                        <span class="item-name"><i class="fas fa-cake"></i>cinnamon roll</span>
+                        <span class="item-price">$4.00</span>
+                    </li>
+                    <div class="item-desc">glaseado de queso · canela</div>
+                    <li class="item">
+                        <span class="item-name"><i class="fas fa-cake"></i>cheesecake</span>
+                        <span class="item-price">$5.00</span>
+                    </li>
+                    <div class="item-desc">coulis de frutos rojos</div>
+                    <li class="item">
+                        <span class="item-name"><i class="fas fa-cake"></i>carrot cake</span>
+                        <span class="item-price">$4.50</span>
+                    </li>
+                    <div class="item-desc">nueces, frosting de queso</div>
+                </ul>
+            </div>
+
+            <!-- COLUMNA 2 (segunda fila): SABROSO -->
+            <div class="category" id="sabroso">
+                <h2 class="category-title"><i class="fas fa-baguette"></i> sabroso</h2>
+                <ul class="item-list">
+                    <li class="item">
+                        <span class="item-name"><i class="fas fa-bread-slice"></i>sándwich de pavo</span>
+                        <span class="item-price">$6.50</span>
+                    </li>
+                    <div class="item-desc">pan integral, pavo, queso, espinacas</div>
+                    <li class="item featured">
+                        <span class="item-name"><i class="fas fa-crown"></i>tosta de aguacate</span>
+                        <span class="item-price">$5.00</span>
+                    </li>
+                    <div class="item-desc">huevo pochado, chile, masa madre</div>
+                    <li class="item">
+                        <span class="item-name"><i class="fas fa-cheese"></i>quiche lorraine</span>
+                        <span class="item-price">$6.00</span>
+                    </li>
+                    <div class="item-desc">bacon, gruyère, crema</div>
+                </ul>
+            </div>
+
+            <!-- COLUMNA 3 (segunda fila): EXTRAS -->
+            <div class="category">
+                <h2 class="category-title"><i class="fas fa-utensils"></i> extras</h2>
+                <ul class="item-list">
+                    <li class="item">
+                        <span class="item-name"><i class="fas fa-bread-slice"></i>pan de masa madre</span>
+                        <span class="item-price">$2.50</span>
+                    </li>
+                    <div class="item-desc">porción con mantequilla</div>
+                    <li class="item">
+                        <span class="item-name"><i class="fas fa-cheese"></i>tabla de quesos</span>
+                        <span class="item-price">$10.00</span>
+                    </li>
+                    <div class="item-desc">3 quesos artesanos, membrillo, nueces</div>
+                    <li class="item">
+                        <span class="item-name"><i class="fas fa-wine-bottle"></i>vino tinto</span>
+                        <span class="item-price">$5.00/copa</span>
+                    </li>
+                    <div class="item-desc">selección de la casa</div>
+                </ul>
+            </div>
+
+            <!-- NOTA CON PERSONALIDAD -->
+            <div class="notes">
+                <i class="fas fa-heart"></i> todos nuestros granos son de comercio justo y tostados en la ciudad <i class="fas fa-heart"></i>
+            </div>
+        </div>
+
+        <!-- FOOTER CON ACTITUD -->
+        <footer class="footer">
+            <div class="contact">
+                <span><i class="far fa-clock"></i> lun a vie 8-20 · sáb 9-18 · dom 9-14</span>
+                <span><i class="fas fa-map-pin"></i> calle de la alegría 42, roma</span>
+                <span><i class="fas fa-phone-alt"></i> 55 6789 1234</span>
+            </div>
+            <div class="social">
+                <a href="#"><i class="fab fa-instagram"></i> @ay.cafe</a>
+                <a href="#"><i class="fab fa-facebook"></i> /aycafe</a>
+                <a href="#"><i class="fab fa-tiktok"></i> @ay.cafe</a>
+            </div>
+            <div class="signature">
+                hecho con amor y cafeína en la cdmx
+            </div>
+        </footer>
+    </div>
+
+    <!-- Script para resaltar sección activa (opcional) -->
+    <script>
+        const categories = document.querySelectorAll('.category');
+        const navBtns = document.querySelectorAll('.nav button');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            categories.forEach(cat => {
+                const top = cat.offsetTop - 150;
+                const bottom = top + cat.offsetHeight;
+                if (window.scrollY >= top && window.scrollY < bottom) {
+                    current = cat.getAttribute('id') || '';
+                }
+            });
+
+            navBtns.forEach(btn => {
+                btn.style.fontWeight = '500';
+                btn.style.color = '#6f5b4b';
+                if (btn.textContent.includes(current)) {
+                    btn.style.fontWeight = '700';
+                    btn.style.color = '#3d2f24';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú | Mar · Azul</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Poppins + Playfair Display -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            line-height: 1.5;
+        }
+
+        /* Layout principal: flex en escritorio */
+        .app {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* BARRA LATERAL (escritorio) */
+        .sidebar {
+            width: 280px;
+            background-color: #ffffff;
+            border-right: 1px solid #e2e8f0;
+            padding: 2rem 1.5rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 4px 0 10px rgba(0,0,0,0.02);
+        }
+
+        .sidebar-header {
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        .sidebar-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0f4c5c;
+            line-height: 1.2;
+        }
+
+        .sidebar-header p {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-top: 0.25rem;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.9rem 1.2rem;
+            border: none;
+            background: transparent;
+            border-radius: 16px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #334155;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            width: 100%;
+        }
+
+        .nav-btn i {
+            font-size: 1.3rem;
+            color: #e76f51;
+            width: 28px;
+            text-align: center;
+        }
+
+        .nav-btn:hover {
+            background-color: #f1f5f9;
+            color: #0f4c5c;
+        }
+
+        .nav-btn.active {
+            background-color: #e76f51;
+            color: white;
+        }
+
+        .nav-btn.active i {
+            color: white;
+        }
+
+        /* CONTENIDO PRINCIPAL */
+        .main-content {
+            flex: 1;
+            padding: 2.5rem;
+            background: #ffffff;
+        }
+
+        .header {
+            margin-bottom: 3rem;
+            border-bottom: 2px solid #e76f51;
+            padding-bottom: 1.2rem;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #0f4c5c;
+            letter-spacing: -0.5px;
+        }
+
+        .header .sub {
+            font-size: 1.1rem;
+            color: #475569;
+            font-weight: 300;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 0.25rem;
+        }
+
+        .header .sub i {
+            color: #e76f51;
+        }
+
+        /* Secciones */
+        .menu-section {
+            margin-bottom: 3.5rem;
+            scroll-margin-top: 2rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: #0f4c5c;
+            margin-bottom: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .section-title i {
+            font-size: 2rem;
+            color: #e76f51;
+        }
+
+        /* Grid de tarjetas: 2 columnas en escritorio */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        /* Tarjeta de platillo (formato apaisado) */
+        .menu-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 12px 30px -8px rgba(0, 50, 70, 0.12);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #f0f4f8;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 35px -10px #0f4c5c40;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #0f4c5c;
+        }
+
+        .card-price {
+            background: #e76f51;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.25rem 1rem;
+            border-radius: 60px;
+            letter-spacing: 0.5px;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: #475569;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .card-tags {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .card-tags i {
+            color: #e76f51;
+            margin-right: 0.25rem;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 4rem;
+            text-align: center;
+            border-top: 2px dashed #cbd5e1;
+            padding-top: 2rem;
+            color: #475569;
+        }
+
+        .contact-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .demo-note {
+            background-color: #f1f5f9;
+            padding: 0.7rem 2rem;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            color: #1e293b;
+            display: inline-block;
+        }
+
+        .footer a {
+            color: #e76f51;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        /* Tablet y móvil: la barra lateral se convierte en navegación superior */
+        @media (max-width: 900px) {
+            .app {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: sticky;
+                top: 0;
+                z-index: 20;
+                padding: 1rem 1.5rem;
+                border-right: none;
+                border-bottom: 1px solid #e2e8f0;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            }
+
+            .sidebar-header {
+                display: none;  /* Ocultamos el título para ahorrar espacio */
+            }
+
+            .nav-links {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+            }
+
+            .nav-btn {
+                width: auto;
+                padding: 0.6rem 1.2rem;
+                border-radius: 40px;
+                background-color: #f8fafc;
+                justify-content: center;
+            }
+
+            .nav-btn i {
+                margin-right: 0.3rem;
+            }
+
+            .main-content {
+                padding: 1.5rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr; /* Una columna en móvil */
+                gap: 1.5rem;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            .card-price {
+                align-self: flex-start;
+            }
+            .contact-row {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- Barra lateral de navegación (sticky) -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Mar · Azul</h2>
+                <p>cocina de mar</p>
+            </div>
+            <nav class="nav-links">
+                <button class="nav-btn active" onclick="scrollToSection('entradas')"><i class="fas fa-shrimp"></i> Entradas</button>
+                <button class="nav-btn" onclick="scrollToSection('sopas')"><i class="fas fa-thermometer-half"></i> Sopas</button>
+                <button class="nav-btn" onclick="scrollToSection('platos')"><i class="fas fa-fish"></i> Platos fuertes</button>
+                <button class="nav-btn" onclick="scrollToSection('combinados')"><i class="fas fa-utensil-spoon"></i> Combinados</button>
+                <button class="nav-btn" onclick="scrollToSection('bebidas')"><i class="fas fa-cocktail"></i> Bebidas</button>
+            </nav>
+        </aside>
+
+        <!-- Contenido principal -->
+        <main class="main-content">
+            <div class="header">
+                <h1>Mar · Azul</h1>
+                <div class="sub"><i class="fas fa-anchor"></i> Desde el océano a tu mesa, con respeto y pasión</div>
+            </div>
+
+            <!-- SECCIONES (mismas que antes, con imágenes reales) -->
+            <section id="entradas" class="menu-section">
+                <h2 class="section-title"><i class="fas fa-shrimp"></i> Entradas</h2>
+                <div class="menu-grid">
+                    <!-- Ceviche -->
+                    <div class="menu-card">
+                        <img class="card-img" src="https://images.unsplash.com/photo-1626131348991-78d3b2f1a9b0?w=600&h=400&fit=crop&auto=format" alt="Ceviche de Camarón" loading="lazy">
+                        <div class="card-content">
+                            <div class="card-header">
+                                <span class="card-name">Ceviche de Camarón</span>
+                                <span class="card-price">$9.50</span>
+                            </div>
+                            <div class="card-desc">Camarón fresco cocido en limón, cebolla morada, cilantro, pepino y tomate. Con tostadas.</div>
+                            <div class="card-tags"><i class="fas fa-pepper-hot"></i> Picor suave</div>
+                        </div>
+                    </div>
+                    <!-- Ostiones -->
+                    <div class="menu-card">
+                        <img class="card-img" src="https://images.unsplash.com/photo-1617192758535-97f93ebf2720?w=600&h=400&fit=crop&auto=format" alt="Ostiones" loading="lazy">
+                        <div class="card-content">
+                            <div class="card-header">
+                                <span class="card-name">Ostiones del día</span>
+                                <span class="card-price">$12.00</span>
+                            </div>
+                            <div class="card-desc">Media docena de ostiones frescos, limón, salsa cocktail y mignonette.</div>
+                            <div class="card-tags"><i class="fas fa-water"></i> Crudos</div>
+                        </div>
+                    </div>
+                    <!-- Tostada de Pulpo -->
+                    <div class="menu-card">
+                        <img class="card-img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=600&h=400&fit=crop&auto=format" alt="Tostada de Pulpo" loading="lazy">
+                        <div class="card-content">
+                            <div class="card-header">
+                                <span class="card-name">Tostada de Pulpo</span>
+                                <span class="card-price">$8.50</span>
+                            </div>
+                            <div class="card-desc">Pulpo a la plancha, mayonesa de chipotle, aguacate y pico de gallo.</div>
+                            <div class="card-tags"><i class="fas fa-fire"></i> A la plancha</div>
+                        </div>
+                    </div>
+                    <!-- Aguachile -->
+                    <div class="menu-card">
+                        <img class="card-img" src="https://images.unsplash.com/photo-1559847844-5315695dadae?w=600&h=400&fit=crop&auto=format" alt="Aguachile Verde" loading="lazy">
+                        <div class="card-content">
+                            <div class="card-header">
+                                <span class="card-name">Aguachile Verde</span>
+                                <span class="card-price">$11.00</span>
+                            </div>
+                            <div class="card-desc">Camarón en jugo de limón, pepino, cebolla morada, cilantro y chile serrano.</div>
+                            <div class="card-tags"><i class="fas fa-leaf"></i> Refrescante</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sopas" class="menu-section">
+                <h2 class="section-title"><i class="fas fa-thermometer-half"></i> Sopas & Caldillos</h2>
+                <div class="menu-grid">
+                    <div class="menu-card">
+                        <img class="card-img" src="https://images.unsplash.com/photo-1608039834745-1401c3e121f1?w=600&h=400&fit=crop&auto=format" alt="Caldo de Camarón" loading="lazy">
+                        <div class="card-content">
+                            <div class="card-header">
+                                <span class="card-name">Caldo de Camarón</span>
+                                <span class="card-price">$12.50</span>
+                            </div>
+                            <div class="card-desc">Caldo rojo con camarón seco y fresco, papa, zanahoria, chile guajillo y epazote.</div>
+                            <div class="card-tags"><i class="fas fa-pepper-hot"></i> Tradicional</div>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <img class="card-img" src="https://images.unsplash.com/photo-1604152135912-04a022e2366d?w=600&h=400&fit=crop&auto=format" alt="Sopa de Mariscos" loading="lazy">
+                        <div class="card-content">
+                            <div class="card-header">
+                                <span class="card-name">Sopa de Mariscos</span>
+                                <span class="card-price">$14.00</span>
+                            </div>
+                            <div class="card-desc">Caldo de pescado con camarón, pulpo, mejillón, almeja y pescado blanco.</div>
+                            <div class="card-tags"><i class="fas fa-fish"></i> La casa</div>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <img class="card-img" src="https://images.unsplash.com/photo-1627662057125-c9638cd5bbd3?w=600&h=400&fit=crop&auto=format" alt="Caldo de Pescado" loading="lazy">
+                        <div class="card-content">
+                            <div class="card-header">
+                                <span class="card-name">Caldo de Pescado</span>
+                                <span class="card-price">$11.00</span>
+                            </div>
+                            <div class="card-desc">Caldo claro con pescado, verduras, arroz y perejil. Ligero y reconfortante.</div>
+                            <div class="card-tags"><i class="fas fa-heart"></i> Ligero</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="platos" class="menu-section">
+                <h2 class="section-title"><i class="fas fa-fish"></i> Platos Fuertes</h2>
+                <div class="menu-grid">
+                    <div class="menu-card">
+                        <img class="card-img" src="https://images.unsplash.com/photo-1580476262798-bddd9f4b7362?w=600&h=400&fit=crop&auto=format" alt="Filete Veracruzano" loading="lazy">
+                        <div class="card-content">
+                            <div class="card-header">
+                                <span class="card-name">Filete Veracruzano</span>
+                                <span class="card-price">$16.50</span>
+                            </div>
+                            <div class="card-desc">Pescado en salsa de jitomate, aceitunas, alcaparras y chiles güeros. Con arroz.</div>
+                            <div class="card-tags"><i class="fas fa-olive"></i> Veracruz</div>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <img class="card-img" src="https://images.unsplash.com/photo-1625943553852-781c6dd46faa?w=600&h=400&fit=crop&auto=format" alt="Camarones al Ajillo" loading="lazy">
+                        <div class="card-content">
+                            <div class="card-header">
+                                <span class="card-name">Camarones al Ajillo</span>
+                                <span class="card-price">$17.00</span>
+                            </div>
+                            <div class="card-desc">Salteados con ajo, guindilla y perejil. Acompañados de papas a la francesa.</div>
+                            <div class="card-tags"><i class="fas fa-garlic"></i> Al ajillo</div>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <img class="card-img" src="https://images.unsplash.com/photo-1564832684674-19b8ad9e7c62?w=600&h=400&fit=crop&auto=format" alt="Pulpo a la Parrilla" loading="lazy">
+                        <div class="card-content">
+                            <div class="card-header">
+                                <span class="card-name">Pulpo a la Parrilla</span>
+                                <span class="card-price">$19.00</span>
+                            </div>
+                            <div class="card-desc">Pulpo tierno asado, con puré de papa al romero y reducción de tinta.</div>
+                            <div class="card-tags"><i class="fas fa-fire"></i> Parrilla</div>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <img class="card-img" src="https://images.unsplash.com/photo-1617195003350-150e2b5a1fdb?w=600&h=400&fit=crop&auto=format" alt="Pescado Zarandeado" loading="lazy">
+                        <div class="card-content">
+                            <div class="card-header">
+                                <span class="card-name">Pescado Zarandeado</span>
+                                <span class="card-price">$22.00</span>
+                            </div>
+                            <div class="card-desc">Entero marinado en salsa de soya, adobo y mantequilla, asado a las brasas.</div>
+                            <div class="card-tags"><i class="fas fa-utensils"></i> Especialidad</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="combinados" class="menu-section">
+                <h2 class="section-title"><i class="fas fa-utensil-spoon"></i> Combinados</h2>
+                <div class="menu-grid">
+                    <div class="menu-card">
+                        <img class="card-img" src="https://images.unsplash.com/photo-1629709305580-5a833dc72d4a?w=600&h=400&fit=crop&auto=format" alt="Cóctel de Camarones" loading="lazy">
+                        <div class="card-content">
+                            <div class="card-header">
+                                <span class="card-name">Cóctel de Camarones</span>
+                                <span class="card-price">$13.00</span>
+                            </div>
+                            <div class="card-desc">Camarones en salsa cocktail, aguacate, cebolla y cilantro. Con galletas.</div>
+                            <div class="card-tags"><i class="fas fa-cocktail"></i> Refrescante</div>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <img class="card-img" src="https://images.unsplash.com/photo-1608039829572-78524f79c4b7?w=600&h=400&fit=crop&auto=format" alt="Parrillada de Mariscos" loading="lazy">
+                        <div class="card-content">
+                            <div class="card-header">
+                                <span class="card-name">Parrillada de Mariscos</span>
+                                <span class="card-price">$28.00</span>
+                            </div>
+                            <div class="card-desc">Camarón, pulpo, pescado, mejillón y callo de hacha asados. Para compartir.</div>
+                            <div class="card-tags"><i class="fas fa-crown"></i> Para compartir</div>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <img class="card-img" src="https://images.unsplash.com/photo-1626131388352-3439c5c6c5d1?w=600&h=400&fit=crop&auto=format" alt="Tacos de Pescado" loading="lazy">
+                        <div class="card-content">
+                            <div class="card-header">
+                                <span class="card-name">Tacos de Pescado (3pz)</span>
+                                <span class="card-price">$9.50</span>
+                            </div>
+                            <div class="card-desc">Pescado empanizado, repollo morado, crema de chipotle y salsa de mango.</div>
+                            <div class="card-tags"><i class="fas fa-taco"></i> Baja style</div>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <img class="card-img" src="https://images.unsplash.com/photo-1583337130410-05f1adf41f5c?w=600&h=400&fit=crop&auto=format" alt="Tostada Mixta" loading="lazy">
+                        <div class="card-content">
+                            <div class="card-header">
+                                <span class="card-name">Tostada Mixta</span>
+                                <span class="card-price">$10.00</span>
+                            </div>
+                            <div class="card-desc">Camarón, pulpo, ceviche de pescado y aguacate en tostada crujiente.</div>
+                            <div class="card-tags"><i class="fas fa-star"></i> Mixta</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="bebidas" class="menu-section">
+                <h2 class="section-title"><i class="fas fa-cocktail"></i> Bebidas</h2>
+                <div class="menu-grid">
+                    <div class="menu-card">
+                        <img class="card-img" src="https://images.unsplash.com/photo-1551024705-3272b5b9a8f2?w=600&h=400&fit=crop&auto=format" alt="Margarita" loading="lazy">
+                        <div class="card-content">
+                            <div class="card-header">
+                                <span class="card-name">Margarita de la Casa</span>
+                                <span class="card-price">$7.00</span>
+                            </div>
+                            <div class="card-desc">Tequila, limón, naranja y toque de chamoy.</div>
+                            <div class="card-tags"><i class="fas fa-citrus"></i> Clásica</div>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <img class="card-img" src="https://images.unsplash.com/photo-1574077299503-7dcdc487b2f5?w=600&h=400&fit=crop&auto=format" alt="Michelada" loading="lazy">
+                        <div class="card-content">
+                            <div class="card-header">
+                                <span class="card-name">Michelada</span>
+                                <span class="card-price">$5.50</span>
+                            </div>
+                            <div class="card-desc">Cerveza con limón, salsa inglesa, chile y sal.</div>
+                            <div class="card-tags"><i class="fas fa-glass-cheers"></i> Preparada</div>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <img class="card-img" src="https://images.unsplash.com/photo-1595981267035-7b04ca84a82d?w=600&h=400&fit=crop&auto=format" alt="Agua de Coco" loading="lazy">
+                        <div class="card-content">
+                            <div class="card-header">
+                                <span class="card-name">Agua de Coco</span>
+                                <span class="card-price">$4.00</span>
+                            </div>
+                            <div class="card-desc">Agua de coco fría, en su envase natural.</div>
+                            <div class="card-tags"><i class="fas fa-coconut"></i> Natural</div>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <img class="card-img" src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=600&h=400&fit=crop&auto=format" alt="Cerveza Artesanal" loading="lazy">
+                        <div class="card-content">
+                            <div class="card-header">
+                                <span class="card-name">Cerveza Artesanal</span>
+                                <span class="card-price">$5.00</span>
+                            </div>
+                            <div class="card-desc">Selección de cervezas locales: Lager, IPA, Porter.</div>
+                            <div class="card-tags"><i class="fas fa-beer"></i> Artesanal</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="footer">
+                <div class="contact-row">
+                    <span><i class="fas fa-clock"></i> Mar-Dom 12:00-21:00</span>
+                    <span><i class="fas fa-map-pin"></i> Hermosillo, Sinaloa</span>
+                    <span><i class="fas fa-phone-alt"></i> +52 662 522 8513</span>
+                </div>
+                <div class="demo-note">
+                    ⚡ Menú demo · imágenes Unsplash · precios de referencia
+                </div>
+                <p style="margin-top: 1.5rem; font-size:0.9rem">
+                    🌊 <a href="#">Instagram</a> · <a href="#">Facebook</a> · <a href="#">Reservaciones</a> 🌊
+                </p>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+            // Actualizar clase activa en botones (opcional)
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            // Aquí podrías añadir lógica para marcar el botón correspondiente
+        }
+
+        // Marcar el botón activo según la sección visible (opcional, mejora UX)
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.menu-section');
+            const navButtons = document.querySelectorAll('.nav-btn');
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                const sectionBottom = sectionTop + section.offsetHeight;
+                if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navButtons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase().includes(current)) {
+                    btn.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

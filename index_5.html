@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>· NEO · Menú Espectacular</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Anton + Montserrat + Playfair Display (para toques) -->
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a0a;
+            font-family: 'Montserrat', sans-serif;
+            color: #fff;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            background-image: radial-gradient(circle at 30% 30%, #1a1a2e 0%, #0a0a0a 80%);
+        }
+
+        /* Efecto de partículas (simulado con gradientes) */
+        .noise {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc0IiBudW1PY3RhdmVzPSIzIiAvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNmKSIgb3BhY2l0eT0iMC4wNCIgLz48L3N2Zz4=');
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .menu-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* HEADER ESPECTACULAR */
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .glitch {
+            font-family: 'Anton', sans-serif;
+            font-size: 8rem;
+            text-transform: uppercase;
+            color: white;
+            text-shadow: 
+                0.05em 0 0 rgba(255,0,100,0.8),
+                -0.05em -0.025em 0 rgba(0,255,255,0.8),
+                0.025em 0.05em 0 rgba(255,255,0,0.8);
+            animation: glitch 725ms infinite;
+            letter-spacing: 5px;
+        }
+
+        @keyframes glitch {
+            0% { text-shadow: 0.05em 0 0 rgba(255,0,100,0.8), -0.05em -0.025em 0 rgba(0,255,255,0.8), 0.025em 0.05em 0 rgba(255,255,0,0.8); }
+            14% { text-shadow: 0.05em 0 0 rgba(255,0,100,0.8), -0.05em -0.025em 0 rgba(0,255,255,0.8), 0.025em 0.05em 0 rgba(255,255,0,0.8); }
+            15% { text-shadow: -0.05em -0.025em 0 rgba(255,0,100,0.8), 0.025em 0.025em 0 rgba(0,255,255,0.8), -0.05em -0.05em 0 rgba(255,255,0,0.8); }
+            49% { text-shadow: -0.05em -0.025em 0 rgba(255,0,100,0.8), 0.025em 0.025em 0 rgba(0,255,255,0.8), -0.05em -0.05em 0 rgba(255,255,0,0.8); }
+            50% { text-shadow: 0.025em 0.05em 0 rgba(255,0,100,0.8), 0.05em 0 0 rgba(0,255,255,0.8), 0 -0.05em 0 rgba(255,255,0,0.8); }
+            99% { text-shadow: 0.025em 0.05em 0 rgba(255,0,100,0.8), 0.05em 0 0 rgba(0,255,255,0.8), 0 -0.05em 0 rgba(255,255,0,0.8); }
+            100% { text-shadow: 0.05em 0 0 rgba(255,0,100,0.8), -0.05em -0.025em 0 rgba(0,255,255,0.8), 0.025em 0.05em 0 rgba(255,255,0,0.8); }
+        }
+
+        .subhead {
+            font-size: 1.2rem;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: #ccc;
+            margin-top: -2rem;
+            background: linear-gradient(45deg, #ff99cc, #99ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 300;
+        }
+
+        /* NAVEGACIÓN CON NEÓN */
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 3rem 0 4rem;
+            padding: 0.5rem;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding: 0.8rem 2rem;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 15px rgba(255, 0, 200, 0.3);
+        }
+
+        .nav-btn:hover {
+            border-color: #ff44cc;
+            box-shadow: 0 0 30px #ff44cc, 0 0 60px #44ccff;
+            transform: scale(1.1);
+        }
+
+        /* DISEÑO ASIMÉTRICO ESPECTACULAR */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Tarjetas con tamaños variables */
+        .card {
+            position: relative;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 20px 30px -10px black;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            background: rgba(20, 20, 30, 0.7);
+        }
+
+        .card:hover {
+            transform: scale(1.02) translateY(-10px);
+            box-shadow: 0 0 40px #ff44cc, 0 0 80px #44ccff;
+            border-color: #ff44cc;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+            filter: grayscale(0.8) contrast(1.2);
+            mix-blend-mode: luminosity;
+        }
+
+        .card:hover .card-img {
+            transform: scale(1.1);
+            filter: grayscale(0) contrast(1.2);
+        }
+
+        .card-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            color: white;
+            transform: translateY(30%);
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover .card-content {
+            transform: translateY(0);
+        }
+
+        .card-name {
+            font-family: 'Anton', sans-serif;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            color: white;
+            text-shadow: 0 0 10px #ff44cc;
+            line-height: 1.2;
+        }
+
+        .card-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffcc44;
+            text-shadow: 0 0 8px #ffaa00;
+        }
+
+        .card-desc {
+            font-size: 0.85rem;
+            margin: 0.5rem 0;
+            opacity: 0.9;
+        }
+
+        .card-tags {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: #ccc;
+        }
+
+        /* TAMAÑOS DE TARJETA (asimetría) */
+        .card.tall {
+            grid-row: span 2;
+            height: 100%;
+        }
+        .card.wide {
+            grid-column: span 2;
+        }
+        .card.full {
+            grid-column: span 4;
+            height: 300px;
+        }
+        .card.medium {
+            grid-row: span 1;
+        }
+
+        /* Para que las alturas sean consistentes */
+        .menu-grid {
+            grid-auto-rows: minmax(250px, auto);
+        }
+
+        /* Ajustes específicos para destacar */
+        .card:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+        .card:nth-child(2) { grid-column: span 1; }
+        .card:nth-child(3) { grid-column: span 1; }
+        .card:nth-child(4) { grid-column: span 2; }
+        .card:nth-child(5) { grid-column: span 1; }
+        .card:nth-child(6) { grid-column: span 1; }
+        .card:nth-child(7) { grid-column: span 2; }
+        .card:nth-child(8) { grid-column: span 2; }
+        .card:nth-child(9) { grid-column: span 1; }
+        .card:nth-child(10) { grid-column: span 1; }
+        .card:nth-child(11) { grid-column: span 2; grid-row: span 2; }
+        .card:nth-child(12) { grid-column: span 2; }
+
+        /* SECCIONES (no usamos títulos tradicionales, los integramos como cards especiales) */
+        .section-marker {
+            grid-column: span 4;
+            text-align: center;
+            font-family: 'Anton', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 10px;
+            color: transparent;
+            -webkit-text-stroke: 2px #ff44cc;
+            text-shadow: 0 0 20px #ff44cc;
+            margin: 2rem 0 1rem;
+            text-transform: uppercase;
+        }
+
+        /* FOOTER */
+        .footer {
+            margin-top: 5rem;
+            text-align: center;
+            border-top: 1px solid #ff44cc;
+            padding-top: 2rem;
+            color: #aaa;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contacto {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            font-size: 1rem;
+        }
+
+        .contacto i {
+            color: #ff44cc;
+            margin-right: 0.5rem;
+        }
+
+        .neon-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,68,204,0.5);
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+        }
+
+        .neon-link:hover {
+            background: #ff44cc;
+            color: black;
+            box-shadow: 0 0 20px #ff44cc;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1000px) {
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .glitch {
+                font-size: 5rem;
+            }
+            .card:nth-child(n) {
+                grid-column: span 1 !important;
+                grid-row: span 1 !important;
+            }
+            .section-marker {
+                grid-column: span 2;
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            .glitch {
+                font-size: 3rem;
+            }
+            .nav-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            .section-marker {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="noise"></div>
+    <div class="menu-container">
+
+        <!-- HEADER ESPECTACULAR -->
+        <div class="header">
+            <div class="glitch">NEO</div>
+            <div class="subhead">experiencia sensorial</div>
+        </div>
+
+        <!-- Navegación neón -->
+        <nav class="nav-bar">
+            <button class="nav-btn" onclick="document.getElementById('signature').scrollIntoView({behavior: 'smooth'})">Signature</button>
+            <button class="nav-btn" onclick="document.getElementById('tierra').scrollIntoView({behavior: 'smooth'})">Tierra</button>
+            <button class="nav-btn" onclick="document.getElementById('mar').scrollIntoView({behavior: 'smooth'})">Mar</button>
+            <button class="nav-btn" onclick="document.getElementById('fuego').scrollIntoView({behavior: 'smooth'})">Fuego</button>
+            <button class="nav-btn" onclick="document.getElementById('postres').scrollIntoView({behavior: 'smooth'})">Postres</button>
+        </nav>
+
+        <!-- SECCIÓN SIGNATURE (platillos de autor) -->
+        <div id="signature" class="section-marker">· SIGNATURE ·</div>
+        <div class="menu-grid">
+            <!-- Tarjeta 1: destacada -->
+            <div class="card">
+                <img class="card-img" src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=800&h=1000&fit=crop&auto=format" alt="Solomillo">
+                <div class="card-content">
+                    <div class="card-name">Solomillo OV</div>
+                    <div class="card-price">$38</div>
+                    <div class="card-desc">Black angus, salsa de oporto, puré de coliflor ahumado.</div>
+                    <div class="card-tags"><i class="fas fa-crown"></i> Firma</div>
+                </div>
+            </div>
+            <!-- Tarjeta 2 -->
+            <div class="card">
+                <img class="card-img" src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&h=800&fit=crop&auto=format" alt="Atún">
+                <div class="card-content">
+                    <div class="card-name">Tartar de atún</div>
+                    <div class="card-price">$24</div>
+                    <div class="card-desc">Atún rojo, aguacate, wasabi, crujiente de arroz.</div>
+                    <div class="card-tags"><i class="fas fa-fish"></i> Mar</div>
+                </div>
+            </div>
+            <!-- Tarjeta 3 -->
+            <div class="card">
+                <img class="card-img" src="https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=600&h=800&fit=crop&auto=format" alt="Foie">
+                <div class="card-content">
+                    <div class="card-name">Foie micuit</div>
+                    <div class="card-price">$29</div>
+                    <div class="card-desc">Con chutney de mango y brioche.</div>
+                    <div class="card-tags"><i class="fas fa-crown"></i> Delicia</div>
+                </div>
+            </div>
+            <!-- Tarjeta 4 ancha -->
+            <div class="card wide">
+                <img class="card-img" src="https://images.unsplash.com/photo-1558030006-450675393462?w=1200&h=600&fit=crop&auto=format" alt="Pato">
+                <div class="card-content">
+                    <div class="card-name">Pato laqueado</div>
+                    <div class="card-price">$32</div>
+                    <div class="card-desc">Naranja, jengibre, puré de boniato.</div>
+                    <div class="card-tags"><i class="fas fa-dove"></i> Aves</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN TIERRA -->
+        <div id="tierra" class="section-marker">· TIERRA ·</div>
+        <div class="menu-grid">
+            <div class="card">
+                <img class="card-img" src="https://images.unsplash.com/photo-1580476262798-bddd9f4b7362?w=600&h=800&fit=crop&auto=format" alt="Risotto">
+                <div class="card-content">
+                    <div class="card-name">Risotto boletus</div>
+                    <div class="card-price">$21</div>
+                    <div class="card-desc">Arroz cremoso, boletus, trufa.</div>
+                    <div class="card-tags"><i class="fas fa-mushroom"></i> Vegetal</div>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img" src="https://images.unsplash.com/photo-1546069901-d5bfd2cbfb1f?w=600&h=800&fit=crop&auto=format" alt="Ensalada">
+                <div class="card-content">
+                    <div class="card-name">Ensalada Otoño</div>
+                    <div class="card-price">$14</div>
+                    <div class="card-desc">Pera, queso de cabra, nueces.</div>
+                    <div class="card-tags"><i class="fas fa-leaf"></i> Vegetal</div>
+                </div>
+            </div>
+            <div class="card tall">
+                <img class="card-img" src="https://images.unsplash.com/photo-1604908554017-2a48fb6fefbc?w=800&h=1200&fit=crop&auto=format" alt="Cordero">
+                <div class="card-content">
+                    <div class="card-name">Rack de cordero</div>
+                    <div class="card-price">$36</div>
+                    <div class="card-desc">Hierbas, puré de zanahoria, jugo de menta.</div>
+                    <div class="card-tags"><i class="fas fa-fire"></i> Parrilla</div>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img" src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=600&h=800&fit=crop&auto=format" alt="Pasta">
+                <div class="card-content">
+                    <div class="card-name">Tagliatelle trufa</div>
+                    <div class="card-price">$19</div>
+                    <div class="card-desc">Queso azul, nueces, trufa.</div>
+                    <div class="card-tags"><i class="fas fa-cheese"></i> Delicia</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN MAR -->
+        <div id="mar" class="section-marker">· MAR ·</div>
+        <div class="menu-grid">
+            <div class="card wide">
+                <img class="card-img" src="https://images.unsplash.com/photo-1544025162-d76694265947?w=1200&h=600&fit=crop&auto=format" alt="Lubina">
+                <div class="card-content">
+                    <div class="card-name">Lubina a la sal</div>
+                    <div class="card-price">$34</div>
+                    <div class="card-desc">Con verduras al vapor.</div>
+                    <div class="card-tags"><i class="fas fa-fish"></i> Entero</div>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img" src="https://images.unsplash.com/photo-1559847844-5315695dadae?w=600&h=800&fit=crop&auto=format" alt="Ceviche">
+                <div class="card-content">
+                    <div class="card-name">Ceviche clásico</div>
+                    <div class="card-price">$18</div>
+                    <div class="card-desc">Corvina, boniato, choclo.</div>
+                    <div class="card-tags"><i class="fas fa-pepper-hot"></i> Picante</div>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img" src="https://images.unsplash.com/photo-1617192758535-97f93ebf2720?w=600&h=800&fit=crop&auto=format" alt="Ostiones">
+                <div class="card-content">
+                    <div class="card-name">Ostiones</div>
+                    <div class="card-price">$24</div>
+                    <div class="card-desc">Media docena, mignonette.</div>
+                    <div class="card-tags"><i class="fas fa-water"></i> Crudo</div>
+                </div>
+            </div>
+            <div class="card tall">
+                <img class="card-img" src="https://images.unsplash.com/photo-1564832684674-19b8ad9e7c62?w=800&h=1200&fit=crop&auto=format" alt="Pulpo">
+                <div class="card-content">
+                    <div class="card-name">Pulpo parrilla</div>
+                    <div class="card-price">$29</div>
+                    <div class="card-desc">Puré de patata, pimentón.</div>
+                    <div class="card-tags"><i class="fas fa-fire"></i> Parrilla</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN FUEGO -->
+        <div id="fuego" class="section-marker">· FUEGO ·</div>
+        <div class="menu-grid">
+            <div class="card">
+                <img class="card-img" src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=600&h=800&fit=crop&auto=format" alt="Solomillo">
+                <div class="card-content">
+                    <div class="card-name">Solomillo brasa</div>
+                    <div class="card-price">$32</div>
+                    <div class="card-desc">Chimichurri, papas.</div>
+                    <div class="card-tags"><i class="fas fa-fire"></i> Carbón</div>
+                </div>
+            </div>
+            <div class="card wide">
+                <img class="card-img" src="https://images.unsplash.com/photo-1558030006-450675393462?w=1200&h=600&fit=crop&auto=format" alt="Pollo">
+                <div class="card-content">
+                    <div class="card-name">Pollo al carbón</div>
+                    <div class="card-price">$22</div>
+                    <div class="card-desc">Marinado en especias, salsa verde.</div>
+                    <div class="card-tags"><i class="fas fa-drumstick"></i> Brasa</div>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img" src="https://images.unsplash.com/photo-1625943553852-781c6dd46faa?w=600&h=800&fit=crop&auto=format" alt="Camarones">
+                <div class="card-content">
+                    <div class="card-name">Camarones al ajillo</div>
+                    <div class="card-price">$27</div>
+                    <div class="card-desc">Guindilla, perejil.</div>
+                    <div class="card-tags"><i class="fas fa-garlic"></i> Ajillo</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN POSTRES -->
+        <div id="postres" class="section-marker">· POSTRES ·</div>
+        <div class="menu-grid">
+            <div class="card wide">
+                <img class="card-img" src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=1200&h=600&fit=crop&auto=format" alt="Tarta">
+                <div class="card-content">
+                    <div class="card-name">Tarta Ópalo</div>
+                    <div class="card-price">$12</div>
+                    <div class="card-desc">Chocolate 70%, helado.</div>
+                    <div class="card-tags"><i class="fas fa-candy-cane"></i> Intenso</div>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img" src="https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?w=600&h=800&fit=crop&auto=format" alt="Cheesecake">
+                <div class="card-content">
+                    <div class="card-name">Cheesecake</div>
+                    <div class="card-price">$10</div>
+                    <div class="card-desc">Frutos rojos.</div>
+                    <div class="card-tags"><i class="fas fa-berry"></i> Clásico</div>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img" src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&h=800&fit=crop&auto=format" alt="Crema">
+                <div class="card-content">
+                    <div class="card-name">Crema catalana</div>
+                    <div class="card-price">$8</div>
+                    <div class="card-desc">Costra de azúcar.</div>
+                    <div class="card-tags"><i class="fas fa-fire"></i> Crujiente</div>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img" src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=600&h=800&fit=crop&auto=format" alt="Brownie">
+                <div class="card-content">
+                    <div class="card-name">Brownie de chocolate</div>
+                    <div class="card-price">$9</div>
+                    <div class="card-desc">Nueces, helado de vainilla.</div>
+                    <div class="card-tags"><i class="fas fa-candy"></i> Tentación</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BEBIDAS (integradas como sección extra sin marcador para no recargar) -->
+        <div class="section-marker">· BEBIDAS ·</div>
+        <div class="menu-grid">
+            <div class="card">
+                <img class="card-img" src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600&h=800&fit=crop&auto=format" alt="Vino">
+                <div class="card-content">
+                    <div class="card-name">Vino tinto</div>
+                    <div class="card-price">$9/copa</div>
+                    <div class="card-desc">Ribera, Malbec, Rioja.</div>
+                    <div class="card-tags"><i class="fas fa-wine-bottle"></i> Selección</div>
+                </div>
+            </div>
+            <div class="card wide">
+                <img class="card-img" src="https://images.unsplash.com/photo-1551024705-3272b5b9a8f2?w=1200&h=600&fit=crop&auto=format" alt="Cóctel">
+                <div class="card-content">
+                    <div class="card-name">Cóctel NEO</div>
+                    <div class="card-price">$14</div>
+                    <div class="card-desc">Mezcal, maracuyá, chipotle.</div>
+                    <div class="card-tags"><i class="fas fa-cocktail"></i> Firma</div>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img" src="https://images.unsplash.com/photo-1595981267035-7b04ca84a82d?w=600&h=800&fit=crop&auto=format" alt="Coco">
+                <div class="card-content">
+                    <div class="card-name">Agua de coco</div>
+                    <div class="card-price">$5</div>
+                    <div class="card-desc">Natural</div>
+                    <div class="card-tags"><i class="fas fa-coconut"></i> Fresca</div>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img" src="https://images.unsplash.com/photo-1574077299503-7dcdc487b2f5?w=600&h=800&fit=crop&auto=format" alt="Michelada">
+                <div class="card-content">
+                    <div class="card-name">Michelada</div>
+                    <div class="card-price">$8</div>
+                    <div class="card-desc">Clamato, chile, cerveza.</div>
+                    <div class="card-tags"><i class="fas fa-glass-cheers"></i> Picante</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER ESPECTACULAR -->
+        <footer class="footer">
+            <div class="contacto">
+                <span><i class="fas fa-clock"></i> Jue-Dom 20:00 - 02:00</span>
+                <span><i class="fas fa-map-pin"></i> Av. Reforma 777, CDMX</span>
+                <span><i class="fas fa-phone-alt"></i> +52 55 8888 4444</span>
+            </div>
+            <div>
+                <a href="#" class="neon-link"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="#" class="neon-link"><i class="fab fa-facebook"></i> Facebook</a>
+                <a href="#" class="neon-link"><i class="fas fa-calendar-alt"></i> Reservaciones</a>
+            </div>
+            <div style="font-size:0.8rem; opacity:0.6; margin-top:1rem;">
+                ⚡ Menú demo · Arte culinario · Neo experiencia
+            </div>
+        </footer>
+    </div>
+
+    <!-- Script para mantener el efecto de neón en nav (opcional) -->
+    <script>
+        // Podríamos añadir interacción extra, pero ya está.
+    </script>
+</body>
+</html>

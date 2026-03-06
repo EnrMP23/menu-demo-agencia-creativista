@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú | Ábaco Restaurante</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Cormorant Garamond + Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            font-family: 'Montserrat', sans-serif;
+            color: #e0e0e0;
+            line-height: 1.6;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Contenedor principal con vidrio esmerilado */
+        .menu-wrapper {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(8px);
+            border-radius: 32px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 25px 50px -8px rgba(0,0,0,0.8);
+            padding: 2.5rem 2rem;
+        }
+
+        /* HEADER con logo */
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.5);
+            padding-bottom: 1.5rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .logo-icon {
+            font-size: 3rem;
+            color: #d4af37;
+            transform: rotate(-5deg);
+        }
+
+        .logo-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #ffffff;
+            text-shadow: 2px 2px 0 #d4af37;
+        }
+
+        .logo-tagline {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            color: #d4af37;
+            margin-top: -0.5rem;
+        }
+
+        .header-desc {
+            font-style: italic;
+            color: #b0b0b0;
+            margin-top: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Navegación minimalista */
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            margin: 2rem 0 1.5rem;
+            padding: 0.5rem 0;
+            border-top: 1px dashed #d4af37;
+            border-bottom: 1px dashed #d4af37;
+        }
+
+        .nav-link {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #d4af37;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .nav-link:hover {
+            border-bottom-color: #d4af37;
+            transform: translateY(-2px);
+        }
+
+        /* Secciones */
+        .menu-section {
+            margin-bottom: 4rem;
+            scroll-margin-top: 3rem;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-left: 5px solid #d4af37;
+            padding-left: 1.5rem;
+        }
+
+        .section-title i {
+            color: #d4af37;
+            font-size: 2.2rem;
+        }
+
+        /* Grid tipo revista: 3 columnas en escritorio */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        /* Tarjeta gourmet */
+        .gourmet-card {
+            background: #262626;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #3a3a3a;
+        }
+
+        .gourmet-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 30px -5px #d4af3740;
+            border-color: #d4af37;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            border-bottom: 2px solid #d4af37;
+        }
+
+        .card-content {
+            padding: 1.8rem 1.5rem 1.5rem;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .card-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .card-price {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #d4af37;
+            font-family: 'Cormorant Garamond', serif;
+            background: rgba(212, 175, 55, 0.1);
+            padding: 0.2rem 1rem;
+            border-radius: 60px;
+            border: 1px solid #d4af37;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: #b0b0b0;
+            margin-bottom: 1.2rem;
+            line-height: 1.5;
+        }
+
+        .card-tags {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: #a0a0a0;
+        }
+
+        .card-tags i {
+            color: #d4af37;
+            margin-right: 0.3rem;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 4rem;
+            text-align: center;
+            border-top: 1px solid #d4af37;
+            padding-top: 2rem;
+            font-size: 0.9rem;
+            color: #b0b0b0;
+        }
+
+        .footer .contacto {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .footer a {
+            color: #d4af37;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .demo-note {
+            background-color: #333;
+            padding: 0.7rem 2rem;
+            border-radius: 60px;
+            font-size: 0.85rem;
+            color: #d4af37;
+            display: inline-block;
+            border: 1px solid #d4af37;
+        }
+
+        /* Responsive */
+        @media (max-width: 1000px) {
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logo-text {
+                font-size: 2.5rem;
+            }
+
+            .logo-icon {
+                font-size: 2.2rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .nav-bar {
+                gap: 1.2rem;
+            }
+
+            .nav-link {
+                font-size: 0.85rem;
+                letter-spacing: 1px;
+            }
+
+            .menu-wrapper {
+                padding: 1.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-wrapper">
+        <!-- Header con logo -->
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-utensil-spoon logo-icon"></i>
+                <span class="logo-text">Ábaco</span>
+                <i class="fas fa-utensils logo-icon"></i>
+            </div>
+            <div class="logo-tagline">Cocina de autor</div>
+            <div class="header-desc">Sabores que cuentan historias · Productos de temporada</div>
+        </div>
+
+        <!-- Navegación -->
+        <nav class="nav-bar">
+            <button class="nav-link" onclick="document.getElementById('entradas').scrollIntoView({behavior: 'smooth'})">Entradas</button>
+            <button class="nav-link" onclick="document.getElementById('principales').scrollIntoView({behavior: 'smooth'})">Principales</button>
+            <button class="nav-link" onclick="document.getElementById('postres').scrollIntoView({behavior: 'smooth'})">Postres</button>
+            <button class="nav-link" onclick="document.getElementById('bebidas').scrollIntoView({behavior: 'smooth'})">Bebidas</button>
+        </nav>
+
+        <!-- SECCIÓN ENTRADAS -->
+        <section id="entradas" class="menu-section">
+            <h2 class="section-title"><i class="fas fa-leaf"></i> Entradas</h2>
+            <div class="menu-grid">
+                <div class="gourmet-card">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&h=400&fit=crop&auto=format" alt="Tartar de atún" loading="lazy">
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-name">Tartar de atún</span>
+                            <span class="card-price">$14.50</span>
+                        </div>
+                        <div class="card-desc">Atún rojo macerado en cítricos, aguacate, wasabi y crujiente de arroz.</div>
+                        <div class="card-tags"><i class="fas fa-fish"></i> Mariscos · Frío</div>
+                    </div>
+                </div>
+                <div class="gourmet-card">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=600&h=400&fit=crop&auto=format" alt="Foie micuit" loading="lazy">
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-name">Foie micuit</span>
+                            <span class="card-price">$18.00</span>
+                        </div>
+                        <div class="card-desc">Foie gras de pato con chutney de mango y pan brioche tostado.</div>
+                        <div class="card-tags"><i class="fas fa-crown"></i> Delicia · Caliente</div>
+                    </div>
+                </div>
+                <div class="gourmet-card">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1546069901-d5bfd2cbfb1f?w=600&h=400&fit=crop&auto=format" alt="Ensalada de pera y queso" loading="lazy">
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-name">Ensalada Otoño</span>
+                            <span class="card-price">$11.00</span>
+                        </div>
+                        <div class="card-desc">Rúcula, pera asada, queso de cabra, nueces y vinagreta de miel.</div>
+                        <div class="card-tags"><i class="fas fa-seedling"></i> Vegetariano</div>
+                    </div>
+                </div>
+                <div class="gourmet-card">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1559847844-5315695dadae?w=600&h=400&fit=crop&auto=format" alt="Ceviche de corvina" loading="lazy">
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-name">Ceviche de corvina</span>
+                            <span class="card-price">$13.50</span>
+                        </div>
+                        <div class="card-desc">Corvina, leche de tigre, boniato, cancha y maíz chulpi.</div>
+                        <div class="card-tags"><i class="fas fa-pepper-hot"></i> Picante suave</div>
+                    </div>
+                </div>
+                <div class="gourmet-card">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=600&h=400&fit=crop&auto=format" alt="Carpaccio de res" loading="lazy">
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-name">Carpaccio de res</span>
+                            <span class="card-price">$12.50</span>
+                        </div>
+                        <div class="card-desc">Láminas de filete, parmesano, rúcula, alcaparras y mostaza antigua.</div>
+                        <div class="card-tags"><i class="fas fa-cow"></i> Carnes · Frío</div>
+                    </div>
+                </div>
+                <div class="gourmet-card">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=600&h=400&fit=crop&auto=format" alt="Sopa de cebolla" loading="lazy">
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-name">Sopa de cebolla</span>
+                            <span class="card-price">$9.00</span>
+                        </div>
+                        <div class="card-desc">Caldo de carne, cebolla caramelizada, gratinada con queso comté.</div>
+                        <div class="card-tags"><i class="fas fa-cheese"></i> Clásica</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN PRINCIPALES -->
+        <section id="principales" class="menu-section">
+            <h2 class="section-title"><i class="fas fa-utensils"></i> Platos Principales</h2>
+            <div class="menu-grid">
+                <div class="gourmet-card">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=600&h=400&fit=crop&auto=format" alt="Solomillo Wellington" loading="lazy">
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-name">Solomillo Wellington</span>
+                            <span class="card-price">$34.00</span>
+                        </div>
+                        <div class="card-desc">Solomillo envuelto en duxelle y hojaldre, salsa de Oporto.</div>
+                        <div class="card-tags"><i class="fas fa-crown"></i> Chef's special</div>
+                    </div>
+                </div>
+                <div class="gourmet-card">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&h=400&fit=crop&auto=format" alt="Lubina a la sal" loading="lazy">
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-name">Lubina a la sal</span>
+                            <span class="card-price">$28.00</span>
+                        </div>
+                        <div class="card-desc">Lubina salvaje horneada en costra de sal, acompañada de verduras al vapor.</div>
+                        <div class="card-tags"><i class="fas fa-fish"></i> Pescado</div>
+                    </div>
+                </div>
+                <div class="gourmet-card">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1580476262798-bddd9f4b7362?w=600&h=400&fit=crop&auto=format" alt="Risotto de boletus" loading="lazy">
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-name">Risotto de boletus</span>
+                            <span class="card-price">$19.50</span>
+                        </div>
+                        <div class="card-desc">Arroz arborio, boletus edulis, parmesano y trufa negra rallada.</div>
+                        <div class="card-tags"><i class="fas fa-mushroom"></i> Vegetariano · Trufa</div>
+                    </div>
+                </div>
+                <div class="gourmet-card">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1558030006-450675393462?w=600&h=400&fit=crop&auto=format" alt="Pato laqueado" loading="lazy">
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-name">Pato laqueado</span>
+                            <span class="card-price">$26.00</span>
+                        </div>
+                        <div class="card-desc">Pechuga de pato con salsa agridulce de naranja y jengibre.</div>
+                        <div class="card-tags"><i class="fas fa-dove"></i> Aves</div>
+                    </div>
+                </div>
+                <div class="gourmet-card">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1604908554017-2a48fb6fefbc?w=600&h=400&fit=crop&auto=format" alt="Rack de cordero" loading="lazy">
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-name">Rack de cordero</span>
+                            <span class="card-price">$32.00</span>
+                        </div>
+                        <div class="card-desc">Costillar de cordero con costra de hierbas, puré de zanahoria y jugo de menta.</div>
+                        <div class="card-tags"><i class="fas fa-fire"></i> Parrilla</div>
+                    </div>
+                </div>
+                <div class="gourmet-card">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=600&h=400&fit=crop&auto=format" alt="Pasta fresca con trufa" loading="lazy">
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-name">Tagliatelle trufado</span>
+                            <span class="card-price">$21.00</span>
+                        </div>
+                        <div class="card-desc">Pasta fresca, salsa de queso azul, nueces y trufa de verano.</div>
+                        <div class="card-tags"><i class="fas fa-cheese"></i> Delicias</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN POSTRES -->
+        <section id="postres" class="menu-section">
+            <h2 class="section-title"><i class="fas fa-cake"></i> Postres</h2>
+            <div class="menu-grid">
+                <div class="gourmet-card">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=600&h=400&fit=crop&auto=format" alt="Tarta de chocolate" loading="lazy">
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-name">Tarta Ópalo</span>
+                            <span class="card-price">$9.00</span>
+                        </div>
+                        <div class="card-desc">Chocolate negro 70%, corazón de ganache, helado de vainilla.</div>
+                        <div class="card-tags"><i class="fas fa-candy-cane"></i> Intenso</div>
+                    </div>
+                </div>
+                <div class="gourmet-card">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?w=600&h=400&fit=crop&auto=format" alt="Cheesecake de frutos rojos" loading="lazy">
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-name">Cheesecake</span>
+                            <span class="card-price">$8.50</span>
+                        </div>
+                        <div class="card-desc">Base de galleta, queso crema, coulis de frambuesa y frutos rojos.</div>
+                        <div class="card-tags"><i class="fas fa-berry"></i> Frutal</div>
+                    </div>
+                </div>
+                <div class="gourmet-card">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&h=400&fit=crop&auto=format" alt="Crème brûlée" loading="lazy">
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-name">Crème brûlée</span>
+                            <span class="card-price">$7.50</span>
+                        </div>
+                        <div class="card-desc">Vainilla de Madagascar, costra de azúcar quemado.</div>
+                        <div class="card-tags"><i class="fas fa-fire"></i> Clásico</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN BEBIDAS -->
+        <section id="bebidas" class="menu-section">
+            <h2 class="section-title"><i class="fas fa-wine-glass-alt"></i> Bebidas</h2>
+            <div class="menu-grid">
+                <div class="gourmet-card">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600&h=400&fit=crop&auto=format" alt="Vino tinto" loading="lazy">
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-name">Selección de tintos</span>
+                            <span class="card-price">$9.00 / copa</span>
+                        </div>
+                        <div class="card-desc">Ribera del Duero, Malbec, Rioja Gran Reserva.</div>
+                        <div class="card-tags"><i class="fas fa-wine-bottle"></i> Crianza</div>
+                    </div>
+                </div>
+                <div class="gourmet-card">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1551024705-3272b5b9a8f2?w=600&h=400&fit=crop&auto=format" alt="Cóctel de autor" loading="lazy">
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-name">Ábaco Sour</span>
+                            <span class="card-price">$12.00</span>
+                        </div>
+                        <div class="card-desc">Pisco, limón, jarabe de lavanda, clara de huevo y amargo de angostura.</div>
+                        <div class="card-tags"><i class="fas fa-cocktail"></i> Firma</div>
+                    </div>
+                </div>
+                <div class="gourmet-card">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1595981267035-7b04ca84a82d?w=600&h=400&fit=crop&auto=format" alt="Agua de coco" loading="lazy">
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-name">Agua de coco</span>
+                            <span class="card-price">$4.50</span>
+                        </div>
+                        <div class="card-desc">Coco fresco, servido con hielo y rodaja de lima.</div>
+                        <div class="card-tags"><i class="fas fa-coconut"></i> Natural</div>
+                    </div>
+                </div>
+                <div class="gourmet-card">
+                    <img class="card-img" src="https://images.unsplash.com/photo-1574077299503-7dcdc487b2f5?w=600&h=400&fit=crop&auto=format" alt="Michelada gourmet" loading="lazy">
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-name">Michelada Ábaco</span>
+                            <span class="card-price">$7.00</span>
+                        </div>
+                        <div class="card-desc">Cerveza artesanal, clamato, chile pasilla, limón y sal de gusano.</div>
+                        <div class="card-tags"><i class="fas fa-glass-cheers"></i> Picante</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="contacto">
+                <span><i class="fas fa-clock"></i> Mar-Sáb 19:00-23:30 · Dom 13:00-21:00</span>
+                <span><i class="fas fa-map-pin"></i> Hermosillo, Sonora</span>
+                <span><i class="fas fa-phone-alt"></i> +52 662 522 8513</span>
+                <span><i class="fas fa-envelope"></i> hola@abaco.mx</span>
+            </div>
+            <div class="demo-note">
+                ⚡ Menú demo · fotografías de Unsplash · todos los precios son referenciales
+            </div>
+            <p style="margin-top: 1.5rem; font-size:0.85rem">
+                🌟 <a href="#">Instagram</a> · <a href="#">Facebook</a> · <a href="#">Reservaciones</a> 🌟
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

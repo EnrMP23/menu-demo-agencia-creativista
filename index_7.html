@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Coffee · Menú Hermosillo</title>
+    <style>
+        /* Use Japanese font stack for a more Japanese look */
+        * {
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family: 'Noto Sans JP', 'Yu Gothic', 'Meiryo', 'Hiragino Kaku Gothic Pro', 'MS PGothic', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        body{
+            background:#ffffff;
+            color:#111;
+        }
+        .header{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:20px;
+            background:white;
+            border-bottom:1px solid #000000;
+        }
+        .logo{
+            font-size:26px;
+            font-weight:700;
+            font-family: 'Noto Sans JP', 'Yu Gothic', 'Meiryo', 'Hiragino Kaku Gothic Pro', 'MS PGothic', sans-serif;
+        }
+        .menu-btn{
+            font-size:22px;
+            cursor:pointer;
+        }
+        .selector{
+            padding:15px 20px;
+        }
+        .selector select{
+            width:100%;
+            padding:12px;
+            border-radius:10px;
+            border:1px solid #ddd;
+            background:white;
+            font-size:16px;
+        }
+        .menu{
+            padding: 25px;
+            max-width:800px;
+            margin:auto;
+            padding-bottom: 100px; /* espacio para el footer fijo */
+        }
+        /* Títulos de sección */
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 40px 0 20px 0;
+            padding-bottom: 8px;
+            border-bottom: 0px solid #333;
+            color: #1a1a1a;
+            font-family: 'Noto Sans JP', 'Yu Gothic', 'Meiryo', 'Hiragino Kaku Gothic Pro', 'MS PGothic', sans-serif;
+        }
+        .section-subtitle {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 30px 0 15px 0;
+            color: #000000;
+            border-left: 5px solid #888;
+            padding-left: 15px;
+            font-family: 'Noto Sans JP', 'Yu Gothic', 'Meiryo', 'Hiragino Kaku Gothic Pro', 'MS PGothic', sans-serif;
+        }
+        .item{
+            display:flex;
+            gap:18px;
+            margin-bottom:45px;
+        }
+        .item img{
+            width:70px;
+            height:70px;
+            object-fit:cover;
+            border-radius: 8px;
+        }
+        .info{
+            flex:1;
+        }
+        .top{
+            display:flex;
+            justify-content:space-between;
+            align-items:flex-start;
+        }
+        .title{
+            font-size:22px;
+            font-weight:600;
+            font-family: 'Noto Sans JP', 'Yu Gothic', 'Meiryo', 'Hiragino Kaku Gothic Pro', 'MS PGothic', sans-serif;
+        }
+        .price{
+            font-size:20px;
+            font-weight:600;
+            white-space: nowrap;
+            margin-left: 15px;
+            font-family: 'Noto Sans JP', 'Yu Gothic', 'Meiryo', 'Hiragino Kaku Gothic Pro', 'MS PGothic', sans-serif;
+        }
+        .subtitle{
+            margin-top:4px;
+            color:#666;
+            font-size:14px;
+            font-family: 'Noto Sans JP', 'Yu Gothic', 'Meiryo', 'Hiragino Kaku Gothic Pro', 'MS PGothic', sans-serif;
+        }
+        .description{
+            margin-top:10px;
+            line-height:1.5;
+            color:#444;
+            font-size: 14px;
+            font-family: 'Noto Sans JP', 'Yu Gothic', 'Meiryo', 'Hiragino Kaku Gothic Pro', 'MS PGothic', sans-serif;
+        }
+        .nutrition{
+            margin-top:10px;
+            font-size:14px;
+            font-weight:600;
+            cursor:pointer;
+            display:inline-flex;
+            align-items:center;
+            gap:6px;
+            color: #555;
+            font-family: 'Noto Sans JP', 'Yu Gothic', 'Meiryo', 'Hiragino Kaku Gothic Pro', 'MS PGothic', sans-serif;
+        }
+        .footer{
+            position:fixed;
+            bottom:0;
+            width:100%;
+            padding:16px;
+            background:#e9e9e9;
+            text-align:center;
+        }
+        .footer button{
+            background:white;
+            border:none;
+            padding:10px 30px;
+            border-radius:25px;
+            font-weight:600;
+            cursor:pointer;
+            font-family: 'Noto Sans JP', 'Yu Gothic', 'Meiryo', 'Hiragino Kaku Gothic Pro', 'MS PGothic', sans-serif;
+        }
+        @media(max-width:600px){
+            .title{
+                font-size:18px;
+            }
+            .price{
+                font-size:18px;
+            }
+            .item img{
+                width:60px;
+                height:60px;
+            }
+            .section-title {
+                font-size: 20px;
+            }
+            .section-subtitle {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">the coffee.</div>
+    </header>
+
+    
+
+    <section class="menu">
+
+        <!-- ================================== -->
+        <!-- BEBIDAS PURISTAS (CALIENTES)       -->
+        <!-- ================================== -->
+        <div class="section-title">Puristas quentes</div>
+
+        <!-- Pure Black (Double Shot) -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=150&h=150&fit=crop&auto=format" alt="Pure Black">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Pure Black (Double Shot - 36 ml)</div>
+                    <div class="price">58</div>
+                </div>
+                <div class="subtitle">ピュアブラック</div>
+                <div class="description">
+                    O Espresso. Duplo. 18g de café em 36ml de água. (só café especial) (36 ml) (QUENTE)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Americano -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=150&h=150&fit=crop&auto=format" alt="Americano">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Americano</div>
+                    <div class="price">52</div>
+                </div>
+                <div class="subtitle">アメリカンコーヒー</div>
+                <div class="description">
+                    Um Pure Black diluído em 120ml de água. (só café especial) (160ml) (QUENTE)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Macchiato -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=150&h=150&fit=crop&auto=format" alt="Macchiato">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Macchiato</div>
+                    <div class="price">59</div>
+                </div>
+                <div class="subtitle">マキアート</div>
+                <div class="description">
+                    Pure Black (36 ml) com uma pequena dose de leite vaporizado. (QUENTE)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- True White -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?w=150&h=150&fit=crop&auto=format" alt="True White">
+            <div class="info">
+                <div class="top">
+                    <div class="title">True White</div>
+                    <div class="price">68</div>
+                </div>
+                <div class="subtitle">真実の白</div>
+                <div class="description">
+                    Nosso Latte assinado, com 18g de café. (Com café especial e leite) 230ml (QUENTE)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Matcha Latte -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=150&h=150&fit=crop&auto=format" alt="Matcha Latte">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Matcha Latte</div>
+                    <div class="price">68</div>
+                </div>
+                <div class="subtitle">抹茶ラテ</div>
+                <div class="description">
+                    Matcha e leite vaporizado a perfeição. Uma bebida milenar. (sem café, com leite) (230ml) (QUENTE)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Chai Latte -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1571934811356-5a2a2c2938db?w=150&h=150&fit=crop&auto=format" alt="Chai Latte">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Chai Latte</div>
+                    <div class="price">68</div>
+                </div>
+                <div class="subtitle">チャイラテ</div>
+                <div class="description">
+                    Chai e leite vaporizado. Mix de canela, gengibre, erva-doce, pimenta preta, cravo e anis. (Sem café, com leite) (230 ml) (QUENTE)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- ================================== -->
+        <!-- PURISTAS GELADAS                   -->
+        <!-- ================================== -->
+        <div class="section-title">Puristas Geladas</div>
+
+        <!-- Iced Black -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=150&h=150&fit=crop&auto=format" alt="Iced Black">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Iced Black</div>
+                    <div class="price">52</div>
+                </div>
+                <div class="subtitle">アイスブラック</div>
+                <div class="description">
+                    Café com gelo. (Apenas café) (400 ml) 🌿 (GELADO)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Iced Latte -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=150&h=150&fit=crop&auto=format" alt="Iced Latte">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Iced Latte</div>
+                    <div class="price">70</div>
+                </div>
+                <div class="subtitle">アイスラテ</div>
+                <div class="description">
+                    A pureza do café especial (18g), leite e gelo. (com café e leite) (400 ml) (GELADO)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Matcha Iced Latte -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=150&h=150&fit=crop&auto=format" alt="Matcha Iced Latte">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Matcha Iced Latte</div>
+                    <div class="price">67</div>
+                </div>
+                <div class="subtitle">抹茶アイスラテ</div>
+                <div class="description">
+                    Matcha e leite. Gelado e hipnotizante. (Sem café, com leite) (400 ml) (GELADO)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Iced Chocolate -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?w=150&h=150&fit=crop&auto=format" alt="Iced Chocolate">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Iced Chocolate</div>
+                    <div class="price">99</div>
+                </div>
+                <div class="subtitle">アイスドチョコレート</div>
+                <div class="description">
+                    Bebida com leite e preparado de chocolate. Isso acontece uma vez na vida. (400 ml) (GELADO)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Cold Brew -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=150&h=150&fit=crop&auto=format" alt="Cold Brew">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Cold Brew</div>
+                    <div class="price">78</div>
+                </div>
+                <div class="subtitle">コールドブリューコーヒー</div>
+                <div class="description">
+                    Refrescante e naturalmente doce. (400 ml) (GELADO)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Chai Iced Latte -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1571934811356-5a2a2c2938db?w=150&h=150&fit=crop&auto=format" alt="Chai Iced Latte">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Chai Iced Latte</div>
+                    <div class="price">70</div>
+                </div>
+                <div class="subtitle">チャイアイスラテ</div>
+                <div class="description">
+                    Latte gelado com Chai. Mix de especiarias: canela, erva-doce, pimenta preta, cravo e anis. (Sem café, com leite) (330 ml) (GELADO)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- ================================== -->
+        <!-- AUTORAIS QUENTES                   -->
+        <!-- ================================== -->
+        <div class="section-title">Autorais quentes</div>
+
+        <!-- Sora Latte -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=150&h=150&fit=crop&auto=format" alt="Sora Latte">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Sora Latte</div>
+                    <div class="price">63</div>
+                </div>
+                <div class="subtitle">ソララテ</div>
+                <div class="description">
+                    Butterfly tea, harmonizado com coco, baunilha e leite. Diretamente do céu. (230 ml) (QUENTE)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Vanilla Latte -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=150&h=150&fit=crop&auto=format" alt="Vanilla Latte">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Vanilla Latte</div>
+                    <div class="price">78</div>
+                </div>
+                <div class="subtitle">バニララテ</div>
+                <div class="description">
+                    Latte e Vanilla. Vício com V maiúsculo (com café especial e leite) (230ml) (QUENTE)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Flat Caramel -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=150&h=150&fit=crop&auto=format" alt="Flat Caramel">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Flat Caramel</div>
+                    <div class="price">77</div>
+                </div>
+                <div class="subtitle">フラットキャラメル</div>
+                <div class="description">
+                    Latte com caramelo. A melhor coisa que você vai provar hoje. (com café especial e leite) (230ml) (QUENTE)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Mad Mocha -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?w=150&h=150&fit=crop&auto=format" alt="Mad Mocha">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Mad Mocha</div>
+                    <div class="price">84</div>
+                </div>
+                <div class="subtitle">マッドモカ</div>
+                <div class="description">
+                    Café, leite e chocolate. Um pedaço do céu na terra. (com café e leite) (230ml) (QUENTE)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Matcha Vanilla Latte -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=150&h=150&fit=crop&auto=format" alt="Matcha Vanilla Latte">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Matcha Vanilla Latte</div>
+                    <div class="price">77</div>
+                </div>
+                <div class="subtitle">抹茶バニララテ</div>
+                <div class="description">
+                    Matcha, leite e um toque de baunilha. Craaazy. (QUENTE)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Urban Chocolat -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?w=150&h=150&fit=crop&auto=format" alt="Urban Chocolat">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Urban Chocolat</div>
+                    <div class="price">78</div>
+                </div>
+                <div class="subtitle">アーバンショコラ</div>
+                <div class="description">
+                    Seria este o melhor chocolate quente do mundo? (sem café, com leite) (230ml) (QUENTE)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- ================================== -->
+        <!-- AUTORAIS GELADAS                   -->
+        <!-- ================================== -->
+        <div class="section-title">Autorais geladas</div>
+
+        <!-- Sora Iced Latte -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=150&h=150&fit=crop&auto=format" alt="Sora Iced Latte">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Sora Iced Latte</div>
+                    <div class="price">68</div>
+                </div>
+                <div class="subtitle">アイスソララテ</div>
+                <div class="description">
+                    Butterfly tea, harmonizado com coco, baunilha e leite. Direto dos céus. (400ml). *O chá poderá ser substituído pela spirulina azul, conforme disponibilidade. (GELADO)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Iced Vanilla -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=150&h=150&fit=crop&auto=format" alt="Iced Vanilla">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Iced Vanilla</div>
+                    <div class="price">99</div>
+                </div>
+                <div class="subtitle">アイスバニラ</div>
+                <div class="description">
+                    A combinação perfeita de café, leite e vanilla. Mais gelado que seu coração. (Com café especial e leite) (400 ml) (GELADO)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Black Ginger -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=150&h=150&fit=crop&auto=format" alt="Black Ginger">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Black Ginger</div>
+                    <div class="price">94</div>
+                </div>
+                <div class="subtitle">ブラック ジンジャー</div>
+                <div class="description">
+                    Espresso com gelo, tônica e a magia do gengibre. Surreal de bom. (Com café especial, sem leite) (400 ml) 🌿 (GELADO)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Ichigo Matcha -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=150&h=150&fit=crop&auto=format" alt="Ichigo Matcha">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Ichigo Matcha</div>
+                    <div class="price">87</div>
+                </div>
+                <div class="subtitle">いちご ま茶</div>
+                <div class="description">
+                    Refrescância do matcha e doçura do morango em perfeita sintonia. (sem café, com leite) (400 ml) (GELADO)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Salted Caramel -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=150&h=150&fit=crop&auto=format" alt="Salted Caramel">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Salted Caramel</div>
+                    <div class="price">94</div>
+                </div>
+                <div class="subtitle">塩キャラメル</div>
+                <div class="description">
+                    Latte gelado com caramelo salgado. De nada. (Com café especial e leite) (400 ml) (GELADO)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- ================================== -->
+        <!-- GELATO FRAPPÉS                     -->
+        <!-- ================================== -->
+        <div class="section-title">Gelato Frappés</div>
+
+        <!-- Gelato Frappé Coffee -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=150&h=150&fit=crop&auto=format" alt="Gelato Frappé Coffee">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Gelato Frappé Coffee</div>
+                    <div class="price">94</div>
+                </div>
+                <div class="subtitle">ジェラートフレープ コーヒー</div>
+                <div class="description">
+                    Sorvete de baunilha batido com café e leite. Uma combinação dos deuses (400 ml) (GELADO)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Gelato Frappé Chai -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1571934811356-5a2a2c2938db?w=150&h=150&fit=crop&auto=format" alt="Gelato Frappé Chai">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Gelato Frappé Chai</div>
+                    <div class="price">118</div>
+                </div>
+                <div class="subtitle">ジェラートフラッペ チャイ</div>
+                <div class="description">
+                    Sorvete de baunilha batido com leite e chai. Com calda de caramelo. Tão bom que deveria ser proibido. (400 ml) (GELADO)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Gelato Frappé Matcha -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=150&h=150&fit=crop&auto=format" alt="Gelato Frappé Matcha">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Gelato Frappé Matcha</div>
+                    <div class="price">90</div>
+                </div>
+                <div class="subtitle">ジェラートフレープ 抹茶</div>
+                <div class="description">
+                    Sorvete de baunilha batido com leite e matcha. Morri e fui pro céu. (400 ml) (GELADO)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- ================================== -->
+        <!-- FRESH SODA                         -->
+        <!-- ================================== -->
+        <div class="section-title">Fresh Soda</div>
+
+        <!-- Fresh Soda Pink Lemonade -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=150&h=150&fit=crop&auto=format" alt="Pink Lemonade">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Fresh Soda Pink Lemonade</div>
+                    <div class="price">86</div>
+                </div>
+                <div class="subtitle">ピンクレモネード</div>
+                <div class="description">
+                    Água com gás, limão siciliano e morango. Fora de série (GELADO)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Fresh Soda Maracujá -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=150&h=150&fit=crop&auto=format" alt="Maracujá">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Fresh Soda Maracujá</div>
+                    <div class="price">81</div>
+                </div>
+                <div class="subtitle">パッションフルーツ</div>
+                <div class="description">
+                    Água com gás e maracujá. Cheio de charme (GELADO)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- ================================== -->
+        <!-- COADOS                             -->
+        <!-- ================================== -->
+        <div class="section-title">Coados</div>
+
+        <!-- Hot Drip V60 -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1497515114629-f71d768fd07c?w=150&h=150&fit=crop&auto=format" alt="Hot Drip V60">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Hot Drip V60</div>
+                    <div class="price">94</div>
+                </div>
+                <div class="subtitle">ホットドリップ</div>
+                <div class="description">
+                    Café coado. O método perfeito para apreciar um bom café especial. (QUENTE)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Cold Drip V60 -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=150&h=150&fit=crop&auto=format" alt="Cold Drip V60">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Cold Drip V60</div>
+                    <div class="price">94</div>
+                </div>
+                <div class="subtitle">コールドドリップ</div>
+                <div class="description">
+                    Coado gelado, com pedras de gelo (400 ml) (GELADO)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Cold Drip V60 + Milk -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=150&h=150&fit=crop&auto=format" alt="Cold Drip V60 + Milk">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Cold Drip V60 + Milk</div>
+                    <div class="price">86</div>
+                </div>
+                <div class="subtitle">コールドドリップ+ミルク</div>
+                <div class="description">
+                    O coado perfeito com um toque de leite (400 ml) (GELADO)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- ================================== -->
+        <!-- COMIDAS                            -->
+        <!-- ================================== -->
+        <div class="section-title">Comidas</div>
+
+        <!-- Queijo Quente -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1528736235302-52922df5c122?w=150&h=150&fit=crop&auto=format" alt="Queijo Quente">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Queijo Quente</div>
+                    <div class="price">78</div>
+                </div>
+                <div class="subtitle">ホットチーズ</div>
+                <div class="description">
+                    Mussarela, queijo parmesão e requeijão no pão brioche. Lindo (QUENTE)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Misto Quente -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1528736235302-52922df5c122?w=150&h=150&fit=crop&auto=format" alt="Misto Quente">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Misto Quente</div>
+                    <div class="price">89</div>
+                </div>
+                <div class="subtitle">ハムとチーズのグリル</div>
+                <div class="description">
+                    Mussarela, presunto, um toque de requeijão e pão brioche. Paraiso na terra (QUENTE)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Misto + Tomate Cereja -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1528736235302-52922df5c122?w=150&h=150&fit=crop&auto=format" alt="Misto + Tomate Cereja">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Misto + Tomate Cereja</div>
+                    <div class="price">104</div>
+                </div>
+                <div class="subtitle">トマトのサンドイッチ</div>
+                <div class="description">
+                    Mussarela, presunto, tomate cereja, orégano e um toque de requeijão no pão brioche. Surreal de bom (QUENTE)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- ================================== -->
+        <!-- PADOCA / BAKERY                    -->
+        <!-- ================================== -->
+        <div class="section-title">Bakery</div>
+
+        <!-- Pain au Chocolat -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=150&h=150&fit=crop&auto=format" alt="Pain au Chocolat">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Pain au Chocolat</div>
+                    <div class="price">42</div>
+                </div>
+                <div class="subtitle">パン・オ・ショコラ</div>
+                <div class="description">
+                    Massa folhada com recheio de chocolate. Sabor do céu. Aprox: 45 g
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Croissant Traditional -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=150&h=150&fit=crop&auto=format" alt="Croissant">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Croissant Traditional</div>
+                    <div class="price">47</div>
+                </div>
+                <div class="subtitle">スイーツ</div>
+                <div class="description">
+                    O croissant dos seus sonhos. Aprox. 45 g
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- ================================== -->
+        <!-- DOCES                              -->
+        <!-- ================================== -->
+        <div class="section-title">Dulces</div>
+
+        <!-- Cookie Tradicional -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=150&h=150&fit=crop&auto=format" alt="Cookie">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Cookie Tradicional</div>
+                    <div class="price">52</div>
+                </div>
+                <div class="subtitle">トラディショナルクッキー</div>
+                <div class="description">
+                    Cookie sabor baunilha com gotas de chocolate. Clássico & perfeito.
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- ================================== -->
+        <!-- COMBOS                             -->
+        <!-- ================================== -->
+        <div class="section-title">Combos</div>
+
+        <!-- Iced Latte + Ham & Cheese Sandwich -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=150&h=150&fit=crop&auto=format" alt="Combo 1">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Iced Latte + Ham & Cheese Sandwich</div>
+                    <div class="price">89</div>
+                </div>
+                <div class="subtitle">ミストケンチ + アイスラテ</div>
+                <div class="description">
+                    Iced Latte + Misto Quente
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Iced Latte + Cookie Tradicional -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=150&h=150&fit=crop&auto=format" alt="Combo 2">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Iced Latte + Cookie Tradicional</div>
+                    <div class="price">103</div>
+                </div>
+                <div class="subtitle">アイスラテ + トラディショナルクッキー</div>
+                <div class="description">
+                    Iced Latte + Cookie Tradicional
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- ================================== -->
+        <!-- OTRAS BEBIDAS                      -->
+        <!-- ================================== -->
+        <div class="section-title">Otras bebidas</div>
+
+        <!-- Still Evian Water 330ml -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1566486202021-5d9d9b7e8b7b?w=150&h=150&fit=crop&auto=format" alt="Evian 330ml">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Still Evian Water - 330ml (Glass)</div>
+                    <div class="price">80</div>
+                </div>
+                <div class="subtitle">エビアンウォーター（スティル）</div>
+                <div class="description">
+                    Still Evian Water · 330 ml
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Still Evian Water 500ml -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1566486202021-5d9d9b7e8b7b?w=150&h=150&fit=crop&auto=format" alt="Evian 500ml">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Still Evian Water - 500ml (PET)</div>
+                    <div class="price">63</div>
+                </div>
+                <div class="subtitle">エビアンウォーター（スティル）</div>
+                <div class="description">
+                    Still Evian Water · 500 ml
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Água Mineral Perrier -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1566486202021-5d9d9b7e8b7b?w=150&h=150&fit=crop&auto=format" alt="Perrier">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Água Mineral Perrier</div>
+                    <div class="price">52</div>
+                </div>
+                <div class="subtitle">ミネラルウォーター</div>
+                <div class="description">
+                    Água Mineral Perrier · 330ml
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Félix Schorle -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=150&h=150&fit=crop&auto=format" alt="Felix Schorle">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Félix Schorle</div>
+                    <div class="price">63</div>
+                </div>
+                <div class="subtitle">フェリックス ショーレ</div>
+                <div class="description">
+                    Suco de fruta natural com água mineral sem adição de açúcares, adoçantes ou conservantes artificiais. (355ml)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Felix Natural Water -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1566486202021-5d9d9b7e8b7b?w=150&h=150&fit=crop&auto=format" alt="Felix Natural Water">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Felix Natural Water</div>
+                    <div class="price">50</div>
+                </div>
+                <div class="subtitle">フェリックスミネラルウォーター</div>
+                <div class="description">
+                    Água Natural (355ml)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- ================================== -->
+        <!-- SHOP · CAFÉS Y MERCH               -->
+        <!-- ================================== -->
+        <div class="section-title">Shop</div>
+
+        <!-- White bag 250g -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=150&h=150&fit=crop&auto=format" alt="White bag">
+            <div class="info">
+                <div class="top">
+                    <div class="title">White bag 250g</div>
+                    <div class="price">220</div>
+                </div>
+                <div class="subtitle">グラウンドコーヒー</div>
+                <div class="description">
+                    Café especial de 80 a 85 pontos · 250g EM GRÃOS
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Kraft edition 250g -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=150&h=150&fit=crop&auto=format" alt="Kraft edition">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Kraft edition 250g</div>
+                    <div class="price">300</div>
+                </div>
+                <div class="subtitle">クラフト版</div>
+                <div class="description">
+                    Café especial - Single Origin - 85 a 87 pontos · 250g EM GRÃOS
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Black edition 250g -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=150&h=150&fit=crop&auto=format" alt="Black edition">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Black edition 250g</div>
+                    <div class="price">550</div>
+                </div>
+                <div class="subtitle">ブラックエディション</div>
+                <div class="description">
+                    Café especial - Single Origin - 88 pontos ou mais · 250g EM GRÃOS
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Kit Cafés Editions -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=150&h=150&fit=crop&auto=format" alt="Kit Cafés">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Kit Cafés Editions</div>
+                    <div class="price">899</div>
+                </div>
+                <div class="subtitle">ローストコーヒー豆</div>
+                <div class="description">
+                    Uma unidade de cada edição de café, com 250 g cada. 1 White, 1 Kraft e 1 Black.
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Coffee bag 250g + Tumbler 240ml -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=150&h=150&fit=crop&auto=format" alt="Coffee + Tumbler">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Coffee bag 250g + Tumbler 240ml</div>
+                    <div class="price">550</div>
+                </div>
+                <div class="subtitle">コーヒーバッグ 250g ＋ タンブラー 240ml</div>
+                <div class="description">
+                    Coffee bag 250g + Tumbler 240ml
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Kit Café White 1kg -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=150&h=150&fit=crop&auto=format" alt="Kit White 1kg">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Kit Café White 1kg</div>
+                    <div class="price">499</div>
+                </div>
+                <div class="subtitle">ローストコーヒー豆</div>
+                <div class="description">
+                    Quatro unidades de White bag, de 250g cada. Total de 1 kg.
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- V60 Dripper + Coffee 250g -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1497515114629-f71d768fd07c?w=150&h=150&fit=crop&auto=format" alt="V60 Dripper">
+            <div class="info">
+                <div class="top">
+                    <div class="title">V60 Dripper + Coffee 250g</div>
+                    <div class="price">695</div>
+                </div>
+                <div class="subtitle">V60 ドリッパー ＋ コーヒー 250g</div>
+                <div class="description">
+                    V60 Dripper + Coffee 250g
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Totebags -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=150&h=150&fit=crop&auto=format" alt="Totebag">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Totebags</div>
+                    <div class="price">280</div>
+                </div>
+                <div class="subtitle">トートバッグ</div>
+                <div class="description">
+                    Está para nascer uma Tote bag mais incrível que esta. Preta e crua.
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Dripper -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1497515114629-f71d768fd07c?w=150&h=150&fit=crop&auto=format" alt="Dripper">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Dripper</div>
+                    <div class="price">623</div>
+                </div>
+                <div class="subtitle">ドリッパー</div>
+                <div class="description">
+                    Cerâmica branca fosca com madeira · Prepare seu coado
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Tumbler (360ml) -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=150&h=150&fit=crop&auto=format" alt="Tumbler 360ml">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Tumbler (360ml)</div>
+                    <div class="price">468</div>
+                </div>
+                <div class="subtitle">タンブラーカップ</div>
+                <div class="description">
+                    Leve para todo lugar. Aço inoxidável + Silicone + Acrilico (Grande)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Tumbler (240ml) -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=150&h=150&fit=crop&auto=format" alt="Tumbler 240ml">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Tumbler (240ml)</div>
+                    <div class="price">426</div>
+                </div>
+                <div class="subtitle">タンブラーカップ</div>
+                <div class="description">
+                    Leve para todo lugar. Aço inoxidável + Silicone + Acrilico (Peq)
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Mug -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=150&h=150&fit=crop&auto=format" alt="Mug">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Mug</div>
+                    <div class="price">374</div>
+                </div>
+                <div class="subtitle">マグ</div>
+                <div class="description">
+                    Cerâmica fosca · Mug para o dia a dia
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+        <!-- Umbrella -->
+        <div class="item">
+            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=150&h=150&fit=crop&auto=format" alt="Umbrella">
+            <div class="info">
+                <div class="top">
+                    <div class="title">Umbrella</div>
+                    <div class="price">622</div>
+                </div>
+                <div class="subtitle">傘</div>
+                <div class="description">
+                    Guarda-chuva
+                </div>
+                <div class="nutrition" onclick="info()">ⓘ info nutricional</div>
+            </div>
+        </div>
+
+    </section>
+
+    <div class="footer">
+        <button onclick="window.open('https://thecoffee.jp', '_blank')">thecoffee.jp</button>
+    </div>
+
+    <script>
+        function info(){
+            alert("Información nutricional disponible en tienda.");
+        }
+    </script>
+</body>
+</html>

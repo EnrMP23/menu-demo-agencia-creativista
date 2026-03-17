@@ -42,6 +42,36 @@
             font-weight: 500;
         }
 
+        /* Botones de categorías - ahora con wrap en lugar de scroll */
+        .category-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            padding: 1rem 1rem;
+            background-color: #fff1e0;
+            border-bottom: 2px solid #ffb74d;
+            justify-content: center; /* opcional, centra los botones */
+        }
+        .cat-btn {
+            background: white;
+            border: 2px solid #ffb74d;
+            border-radius: 40px;
+            padding: 0.6rem 1.4rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #b71c1c;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            flex: 0 1 auto; /* permite que se encojan pero no que crezcan desmedidamente */
+        }
+        .cat-btn:hover,
+        .cat-btn:active {
+            background: #b71c1c;
+            color: white;
+            border-color: #b71c1c;
+        }
+
         /* contenedor principal */
         .app-container {
             display: flex;
@@ -65,9 +95,8 @@
                 position: sticky;
                 top: 1rem;
                 align-self: flex-start;
-                display: block !important; /* siempre visible en escritorio */
+                display: block !important;
             }
-            /* ocultar el botón flotante en escritorio */
             .cart-fab {
                 display: none !important;
             }
@@ -76,7 +105,7 @@
             }
         }
 
-        /* categorías y productos (igual que antes) */
+        /* categorías y productos */
         .category-title {
             font-size: 1.8rem;
             font-weight: 700;
@@ -85,6 +114,7 @@
             padding-bottom: 0.4rem;
             margin: 2rem 0 1.5rem 0;
             text-transform: uppercase;
+            scroll-margin-top: 20px;
         }
 
         .menu-grid {
@@ -150,7 +180,7 @@
             transform: scale(0.97);
         }
 
-        /* ===== CARRITO PARA ESCRITORIO (siempre visible) ===== */
+        /* CARRITO ESCRITORIO */
         .cart-section {
             background: #fff5e6;
             border-radius: 32px;
@@ -299,7 +329,7 @@
             font-size: 0.9rem;
         }
 
-        /* ===== BOTÓN FLOTANTE (solo móvil) ===== */
+        /* BOTÓN FLOTANTE MÓVIL */
         .cart-fab {
             position: fixed;
             bottom: 20px;
@@ -308,7 +338,7 @@
             height: 65px;
             background-color: #c62828;
             border-radius: 50%;
-            display: none;  /* solo visible en móvil */
+            display: none;
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
@@ -341,7 +371,7 @@
             border: 2px solid white;
         }
 
-        /* ===== PANEL DESLIZABLE (drawer) del carrito en móvil ===== */
+        /* PANEL DESLIZABLE (drawer) MÓVIL */
         .cart-drawer {
             position: fixed;
             bottom: 0;
@@ -405,10 +435,10 @@
 
         @media (max-width: 899px) {
             .cart-section {
-                display: none; /* ocultamos el carrito lateral en móvil */
+                display: none;
             }
             .cart-fab {
-                display: flex; /* mostramos botón flotante */
+                display: flex;
             }
         }
     </style>
@@ -421,11 +451,12 @@
     <p class="small-note">⏰ Mar-Dom 9am - 5pm</p>
 </div>
 
+<!-- Barra de categorías (ahora con wrap) -->
+<div class="category-buttons" id="categoryButtons"></div>
+
 <div class="app-container">
-    <!-- SECCIÓN MENÚ -->
     <section class="menu-section" id="menuSection"></section>
 
-    <!-- SECCIÓN CARRITO (escritorio) -->
     <aside class="cart-section" id="cartDesktop">
         <div class="cart-header">
             🛒 Tu pedido <span id="cartCountDesktop">0</span>
@@ -493,7 +524,7 @@
             { id: 'ch2', category: 'Chicharrón', name: '1/4 kg Chicharrón', price: 70.00 },
             { id: 'ch3', category: 'Chicharrón', name: 'Chicharrón Norteño Chico', price: 90.00 },
             { id: 'ch4', category: 'Chicharrón', name: 'Chicharrón Norteño Grande', price: 150.00 },
-            // Tacos (base $30, arrachera $40, con queso +$10)
+            // Tacos
             { id: 't1', category: 'Tacos', name: 'Taco Bistec', price: 30.00 },
             { id: 't2', category: 'Tacos', name: 'Taco Bistec con queso', price: 40.00 },
             { id: 't3', category: 'Tacos', name: 'Taco Pollo', price: 30.00 },
@@ -533,18 +564,15 @@
             { id: 'b5', category: 'Bebidas', name: 'Flan', price: 40.00 }
         ];
 
-        // ----- estado del carrito -----
         let cart = {};
 
         // elementos del DOM
         const menuSection = document.getElementById('menuSection');
-        // elementos escritorio
         const cartListDesktop = document.getElementById('cartListDesktop');
         const cartEmptyDesktop = document.getElementById('cartEmptyMsgDesktop');
         const cartCountDesktop = document.getElementById('cartCountDesktop');
         const cartTotalDesktop = document.getElementById('cartTotalDesktop');
         const sendBtnDesktop = document.getElementById('sendWhatsAppBtnDesktop');
-        // elementos móvil (drawer)
         const cartFab = document.getElementById('cartFab');
         const cartFabBadge = document.getElementById('cartFabBadge');
         const cartDrawer = document.getElementById('cartDrawer');
@@ -554,11 +582,36 @@
         const cartEmptyDrawer = document.getElementById('cartEmptyMsgDrawer');
         const cartTotalDrawer = document.getElementById('cartTotalDrawer');
         const sendBtnDrawer = document.getElementById('sendWhatsAppBtnDrawer');
+        const categoryButtonsDiv = document.getElementById('categoryButtons');
 
-        // Utilidad
         const formatPrice = (value) => `$${value.toFixed(2)}`;
 
-        // Renderizar menú
+        function slugify(text) {
+            return text.toLowerCase()
+                .replace(/[^\w ]+/g, '')
+                .replace(/ +/g, '-');
+        }
+
+        function renderCategoryButtons() {
+            const categories = [...new Set(menuItems.map(item => item.category))];
+            let buttonsHtml = '';
+            categories.forEach(cat => {
+                const slug = slugify(cat);
+                buttonsHtml += `<button class="cat-btn" data-category="${slug}">${cat}</button>`;
+            });
+            categoryButtonsDiv.innerHTML = buttonsHtml;
+
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const catSlug = btn.dataset.category;
+                    const targetElement = document.getElementById(`category-${catSlug}`);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        }
+
         function renderMenu() {
             const categories = {};
             menuItems.forEach(item => {
@@ -568,7 +621,8 @@
 
             let html = '';
             for (let cat in categories) {
-                html += `<h2 class="category-title">${cat}</h2>`;
+                const slug = slugify(cat);
+                html += `<h2 class="category-title" id="category-${slug}">${cat}</h2>`;
                 html += '<div class="menu-grid">';
                 categories[cat].forEach(item => {
                     html += `
@@ -592,7 +646,6 @@
             });
         }
 
-        // Funciones carrito
         function addToCart(id) {
             if (cart[id]) cart[id] += 1;
             else cart[id] = 1;
@@ -616,15 +669,12 @@
             const totalItems = cartArray.reduce((acc, i) => acc + i.quantity, 0);
             const totalPrice = cartArray.reduce((acc, i) => acc + (i.price * i.quantity), 0);
 
-            // Actualizar contador flotante
             cartFabBadge.textContent = totalItems;
 
-            // Actualizar escritorio
             cartCountDesktop.textContent = totalItems;
             cartTotalDesktop.textContent = formatPrice(totalPrice);
             updateCartList(cartArray, cartListDesktop, cartEmptyDesktop);
 
-            // Actualizar drawer
             cartTotalDrawer.textContent = formatPrice(totalPrice);
             updateCartList(cartArray, cartListDrawer, cartEmptyDrawer);
         }
@@ -651,7 +701,6 @@
                     `;
                 });
                 listElement.innerHTML = html;
-                // Añadir eventos a botones de eliminar dentro de este contenedor
                 listElement.querySelectorAll('.remove-btn').forEach(btn => {
                     btn.addEventListener('click', (e) => {
                         e.stopPropagation();
@@ -662,7 +711,6 @@
             }
         }
 
-        // Enviar WhatsApp
         function sendWhatsAppOrder() {
             const cartArray = getCartArray();
             if (cartArray.length === 0) {
@@ -686,7 +734,6 @@
             window.open(url, '_blank');
         }
 
-        // Manejo del drawer móvil
         function openDrawer() {
             cartDrawer.classList.add('open');
             drawerOverlay.classList.add('show');
@@ -697,7 +744,6 @@
             drawerOverlay.classList.remove('show');
         }
 
-        // Event listeners
         cartFab.addEventListener('click', openDrawer);
         closeDrawerBtn.addEventListener('click', closeDrawer);
         drawerOverlay.addEventListener('click', closeDrawer);
@@ -705,7 +751,7 @@
         sendBtnDesktop.addEventListener('click', sendWhatsAppOrder);
         sendBtnDrawer.addEventListener('click', sendWhatsAppOrder);
 
-        // Inicializar
+        renderCategoryButtons();
         renderMenu();
         updateAllCarts();
     })();

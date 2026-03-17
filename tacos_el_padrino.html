@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Menú Carnitas El Padrino</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+
+        body {
+            background-color: #fef7f0;
+            color: #2d2d2d;
+        }
+
+        /* encabezado */
+        .header {
+            background: #c62828;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .header h1 {
+            font-size: 2rem;
+            letter-spacing: 1px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+        .header p {
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+        .header a {
+            color: #ffecb3;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* contenedor principal */
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 900px) {
+            .app-container {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+            .menu-section {
+                flex: 2;
+            }
+            .cart-section {
+                flex: 1;
+                position: sticky;
+                top: 1rem;
+                align-self: flex-start;
+                display: block !important; /* siempre visible en escritorio */
+            }
+            /* ocultar el botón flotante en escritorio */
+            .cart-fab {
+                display: none !important;
+            }
+            .cart-drawer {
+                display: none !important;
+            }
+        }
+
+        /* categorías y productos (igual que antes) */
+        .category-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #b71c1c;
+            border-bottom: 3px solid #ffb74d;
+            padding-bottom: 0.4rem;
+            margin: 2rem 0 1.5rem 0;
+            text-transform: uppercase;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .item-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.2rem 1rem;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s;
+            border: 1px solid #ffe0b2;
+            display: flex;
+            flex-direction: column;
+        }
+        .item-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 20px rgba(190, 70, 0, 0.08);
+            border-color: #ff9800;
+        }
+
+        .item-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: #3e2723;
+        }
+
+        .item-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #bf360c;
+            margin: 0.5rem 0 0.8rem 0;
+        }
+        .item-price::before {
+            content: '$';
+            font-size: 1rem;
+            font-weight: 500;
+            margin-right: 2px;
+            color: #e65100;
+        }
+
+        .add-btn {
+            background: #d32f2f;
+            border: none;
+            color: white;
+            padding: 0.8rem 0;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 4px 8px rgba(180, 40, 40, 0.3);
+            margin-top: auto;
+        }
+        .add-btn:hover {
+            background: #b71c1c;
+        }
+        .add-btn:active {
+            transform: scale(0.97);
+        }
+
+        /* ===== CARRITO PARA ESCRITORIO (siempre visible) ===== */
+        .cart-section {
+            background: #fff5e6;
+            border-radius: 32px;
+            padding: 1.5rem 1.2rem;
+            border: 2px solid #ffcc80;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+        }
+
+        .cart-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #bf360c;
+        }
+        .cart-header span {
+            font-size: 1rem;
+            background: #ffe0b2;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            color: #4e2e1a;
+        }
+
+        .cart-items {
+            list-style: none;
+            margin-bottom: 1.8rem;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 6px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.9rem 0;
+            border-bottom: 1px dashed #ffb74d;
+            font-size: 1rem;
+        }
+
+        .cart-item-info {
+            flex: 2;
+        }
+        .cart-item-name {
+            font-weight: 600;
+            color: #4e2e1a;
+        }
+        .cart-item-price {
+            color: #a52727;
+            font-weight: 500;
+        }
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .cart-qty {
+            background: #fff;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            font-weight: 600;
+            border: 1px solid #ffb74d;
+        }
+        .remove-btn {
+            background: none;
+            border: none;
+            color: #b85c5c;
+            font-size: 1.4rem;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #ffecdd;
+            transition: 0.2s;
+        }
+        .remove-btn:hover {
+            background: #ffcdb0;
+            color: #b71c1c;
+        }
+
+        .cart-total {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #1f3a3f;
+            border-top: 3px solid #ffb74d;
+            padding-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .whatsapp-btn {
+            width: 100%;
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 60px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-top: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 6px 14px rgba(37, 211, 102, 0.3);
+            transition: background 0.2s;
+        }
+        .whatsapp-btn:hover {
+            background: #20b859;
+        }
+
+        .empty-cart {
+            text-align: center;
+            color: #af8c6d;
+            padding: 2rem 0;
+            font-style: italic;
+        }
+
+        .restaurant-footer {
+            margin-top: 2rem;
+            background: #fbe9e7;
+            border-radius: 40px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid #ffab91;
+            font-size: 1rem;
+        }
+        .restaurant-footer p {
+            margin: 0.3rem 0;
+        }
+        .bank-details {
+            background: #fff3e0;
+            padding: 1rem;
+            border-radius: 28px;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+        .small-note {
+            color: #a66b48;
+            font-size: 0.9rem;
+        }
+
+        /* ===== BOTÓN FLOTANTE (solo móvil) ===== */
+        .cart-fab {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 65px;
+            height: 65px;
+            background-color: #c62828;
+            border-radius: 50%;
+            display: none;  /* solo visible en móvil */
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            cursor: pointer;
+            z-index: 1000;
+            border: 3px solid #ffb74d;
+            transition: transform 0.2s;
+        }
+        .cart-fab:hover {
+            transform: scale(1.05);
+        }
+        .cart-fab-icon {
+            font-size: 2rem;
+            color: white;
+        }
+        .cart-fab-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ffb74d;
+            color: #1f3a3f;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            border: 2px solid white;
+        }
+
+        /* ===== PANEL DESLIZABLE (drawer) del carrito en móvil ===== */
+        .cart-drawer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fff5e6;
+            border-top-left-radius: 32px;
+            border-top-right-radius: 32px;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+            padding: 1.5rem 1.2rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease-out;
+            z-index: 1001;
+            max-height: 80vh;
+            overflow-y: auto;
+            border-top: 4px solid #ffb74d;
+        }
+        .cart-drawer.open {
+            transform: translateY(0);
+        }
+        .drawer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .drawer-header h2 {
+            font-size: 1.8rem;
+            color: #bf360c;
+        }
+        .close-drawer {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #b85c5c;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #ffecdd;
+        }
+        .drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+        .drawer-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media (max-width: 899px) {
+            .cart-section {
+                display: none; /* ocultamos el carrito lateral en móvil */
+            }
+            .cart-fab {
+                display: flex; /* mostramos botón flotante */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>CARNITAS "EL PADRINO"</h1>
+    <p><a href="tel:+525534326476">📞 55 3432 6476</a> | Irolo esq. Bretaña, Col. Portales, CDMX</p>
+    <p class="small-note">⏰ Mar-Dom 9am - 5pm</p>
+</div>
+
+<div class="app-container">
+    <!-- SECCIÓN MENÚ -->
+    <section class="menu-section" id="menuSection"></section>
+
+    <!-- SECCIÓN CARRITO (escritorio) -->
+    <aside class="cart-section" id="cartDesktop">
+        <div class="cart-header">
+            🛒 Tu pedido <span id="cartCountDesktop">0</span>
+        </div>
+        <div id="cartItemsContainerDesktop">
+            <ul class="cart-items" id="cartListDesktop"></ul>
+            <div id="cartEmptyMsgDesktop" class="empty-cart">🫗 El carrito está vacío</div>
+        </div>
+        <div class="cart-total">
+            <span>Total:</span>
+            <span id="cartTotalDesktop">$0</span>
+        </div>
+        <button class="whatsapp-btn" id="sendWhatsAppBtnDesktop">
+            <span>📲</span> Enviar por WhatsApp
+        </button>
+        <div class="restaurant-footer">
+            <p>💳 BBVA: 2615 3094 09</p>
+            <p>CLABE: 012 180 026153094091</p>
+            <p class="small-note">🛵 Recoge en local o consulta por delivery</p>
+        </div>
+    </aside>
+</div>
+
+<!-- BOTÓN FLOTANTE MÓVIL -->
+<div class="cart-fab" id="cartFab">
+    <span class="cart-fab-icon">🛒</span>
+    <span class="cart-fab-badge" id="cartFabBadge">0</span>
+</div>
+
+<!-- OVERLAY Y DRAWER MÓVIL -->
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<div class="cart-drawer" id="cartDrawer">
+    <div class="drawer-header">
+        <h2>Tu pedido</h2>
+        <button class="close-drawer" id="closeDrawerBtn">✕</button>
+    </div>
+    <div id="cartItemsContainerDrawer">
+        <ul class="cart-items" id="cartListDrawer"></ul>
+        <div id="cartEmptyMsgDrawer" class="empty-cart">🫗 El carrito está vacío</div>
+    </div>
+    <div class="cart-total">
+        <span>Total:</span>
+        <span id="cartTotalDrawer">$0</span>
+    </div>
+    <button class="whatsapp-btn" id="sendWhatsAppBtnDrawer">
+        <span>📲</span> Enviar por WhatsApp
+    </button>
+    <div class="restaurant-footer" style="margin-top:1rem;">
+        <p>💳 BBVA: 2615 3094 09</p>
+        <p>CLABE: 012 180 026153094091</p>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // ----- LISTA DE PRODUCTOS (basada en el PDF) -----
+        const menuItems = [
+            // Carnitas por kilo
+            { id: 'c1', category: 'Carnitas (por peso)', name: '1 kg Carnitas', price: 380.00 },
+            { id: 'c2', category: 'Carnitas (por peso)', name: '3/4 kg Carnitas', price: 285.00 },
+            { id: 'c3', category: 'Carnitas (por peso)', name: '1/2 kg Carnitas', price: 190.00 },
+            { id: 'c4', category: 'Carnitas (por peso)', name: '1/4 kg Carnitas', price: 95.00 },
+            // Chicharrón
+            { id: 'ch1', category: 'Chicharrón', name: 'Orden Chicharrón (100g)', price: 35.00 },
+            { id: 'ch2', category: 'Chicharrón', name: '1/4 kg Chicharrón', price: 70.00 },
+            { id: 'ch3', category: 'Chicharrón', name: 'Chicharrón Norteño Chico', price: 90.00 },
+            { id: 'ch4', category: 'Chicharrón', name: 'Chicharrón Norteño Grande', price: 150.00 },
+            // Tacos (base $30, arrachera $40, con queso +$10)
+            { id: 't1', category: 'Tacos', name: 'Taco Bistec', price: 30.00 },
+            { id: 't2', category: 'Tacos', name: 'Taco Bistec con queso', price: 40.00 },
+            { id: 't3', category: 'Tacos', name: 'Taco Pollo', price: 30.00 },
+            { id: 't4', category: 'Tacos', name: 'Taco Pollo con queso', price: 40.00 },
+            { id: 't5', category: 'Tacos', name: 'Taco Longaniza', price: 30.00 },
+            { id: 't6', category: 'Tacos', name: 'Taco Longaniza con queso', price: 40.00 },
+            { id: 't7', category: 'Tacos', name: 'Taco Campechano', price: 30.00 },
+            { id: 't8', category: 'Tacos', name: 'Taco Campechano con queso', price: 40.00 },
+            { id: 't9', category: 'Tacos', name: 'Taco Arrachera', price: 40.00 },
+            { id: 't10', category: 'Tacos', name: 'Taco Arrachera con queso', price: 50.00 },
+            // Tortas
+            { id: 'tor1', category: 'Tortas', name: 'Torta', price: 45.00 },
+            { id: 'tor2', category: 'Tortas', name: 'Torta con queso', price: 60.00 },
+            // Gorditas
+            { id: 'g1', category: 'Gorditas', name: 'Gordita', price: 30.00 },
+            { id: 'g2', category: 'Gorditas', name: 'Gordita con queso', price: 40.00 },
+            { id: 'g3', category: 'Gorditas', name: 'Gordita con carne', price: 45.00 },
+            // Chilaquiles
+            { id: 'chl1', category: 'Chilaquiles', name: 'Chilaquiles Sencillos', price: 50.00 },
+            { id: 'chl2', category: 'Chilaquiles', name: 'Chilaquiles Especiales', price: 80.00 },
+            // Huaraches
+            { id: 'h1', category: 'Huaraches', name: 'Huarache Sencillo', price: 50.00 },
+            { id: 'h2', category: 'Huaraches', name: 'Huarache Especial', price: 80.00 },
+            // Alambres
+            { id: 'a1', category: 'Alambres', name: 'Alambre', price: 100.00 },
+            { id: 'a2', category: 'Alambres', name: 'Alambre con queso', price: 120.00 },
+            // Quesadillas
+            { id: 'q1', category: 'Quesadillas', name: 'Quesadilla de Chicharrón prensado', price: 30.00 },
+            { id: 'q2', category: 'Quesadillas', name: 'Quesadilla de Sesos', price: 30.00 },
+            { id: 'q3', category: 'Quesadillas', name: 'Quesadilla de Queso', price: 30.00 },
+            { id: 'q4', category: 'Quesadillas', name: 'Quesadilla de Hongos', price: 30.00 },
+            // Bebidas y postres
+            { id: 'b1', category: 'Bebidas', name: 'Refresco', price: 30.00 },
+            { id: 'b2', category: 'Bebidas', name: 'Agua de sabor', price: 30.00 },
+            { id: 'b3', category: 'Bebidas', name: 'Gelatina', price: 30.00 },
+            { id: 'b4', category: 'Bebidas', name: 'Arroz con leche', price: 30.00 },
+            { id: 'b5', category: 'Bebidas', name: 'Flan', price: 40.00 }
+        ];
+
+        // ----- estado del carrito -----
+        let cart = {};
+
+        // elementos del DOM
+        const menuSection = document.getElementById('menuSection');
+        // elementos escritorio
+        const cartListDesktop = document.getElementById('cartListDesktop');
+        const cartEmptyDesktop = document.getElementById('cartEmptyMsgDesktop');
+        const cartCountDesktop = document.getElementById('cartCountDesktop');
+        const cartTotalDesktop = document.getElementById('cartTotalDesktop');
+        const sendBtnDesktop = document.getElementById('sendWhatsAppBtnDesktop');
+        // elementos móvil (drawer)
+        const cartFab = document.getElementById('cartFab');
+        const cartFabBadge = document.getElementById('cartFabBadge');
+        const cartDrawer = document.getElementById('cartDrawer');
+        const drawerOverlay = document.getElementById('drawerOverlay');
+        const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+        const cartListDrawer = document.getElementById('cartListDrawer');
+        const cartEmptyDrawer = document.getElementById('cartEmptyMsgDrawer');
+        const cartTotalDrawer = document.getElementById('cartTotalDrawer');
+        const sendBtnDrawer = document.getElementById('sendWhatsAppBtnDrawer');
+
+        // Utilidad
+        const formatPrice = (value) => `$${value.toFixed(2)}`;
+
+        // Renderizar menú
+        function renderMenu() {
+            const categories = {};
+            menuItems.forEach(item => {
+                if (!categories[item.category]) categories[item.category] = [];
+                categories[item.category].push(item);
+            });
+
+            let html = '';
+            for (let cat in categories) {
+                html += `<h2 class="category-title">${cat}</h2>`;
+                html += '<div class="menu-grid">';
+                categories[cat].forEach(item => {
+                    html += `
+                        <div class="item-card" data-id="${item.id}">
+                            <div class="item-name">${item.name}</div>
+                            <div class="item-price">${formatPrice(item.price)}</div>
+                            <button class="add-btn" data-id="${item.id}">Añadir</button>
+                        </div>
+                    `;
+                });
+                html += '</div>';
+            }
+            menuSection.innerHTML = html;
+
+            document.querySelectorAll('.add-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const id = btn.dataset.id;
+                    addToCart(id);
+                });
+            });
+        }
+
+        // Funciones carrito
+        function addToCart(id) {
+            if (cart[id]) cart[id] += 1;
+            else cart[id] = 1;
+            updateAllCarts();
+        }
+
+        function removeFromCart(id) {
+            delete cart[id];
+            updateAllCarts();
+        }
+
+        function getCartArray() {
+            return Object.entries(cart).map(([id, qty]) => {
+                const item = menuItems.find(i => i.id === id);
+                return { ...item, quantity: qty };
+            }).filter(i => i);
+        }
+
+        function updateAllCarts() {
+            const cartArray = getCartArray();
+            const totalItems = cartArray.reduce((acc, i) => acc + i.quantity, 0);
+            const totalPrice = cartArray.reduce((acc, i) => acc + (i.price * i.quantity), 0);
+
+            // Actualizar contador flotante
+            cartFabBadge.textContent = totalItems;
+
+            // Actualizar escritorio
+            cartCountDesktop.textContent = totalItems;
+            cartTotalDesktop.textContent = formatPrice(totalPrice);
+            updateCartList(cartArray, cartListDesktop, cartEmptyDesktop);
+
+            // Actualizar drawer
+            cartTotalDrawer.textContent = formatPrice(totalPrice);
+            updateCartList(cartArray, cartListDrawer, cartEmptyDrawer);
+        }
+
+        function updateCartList(cartArray, listElement, emptyElement) {
+            if (cartArray.length === 0) {
+                listElement.innerHTML = '';
+                emptyElement.style.display = 'block';
+            } else {
+                emptyElement.style.display = 'none';
+                let html = '';
+                cartArray.forEach(item => {
+                    html += `
+                        <li class="cart-item">
+                            <div class="cart-item-info">
+                                <div class="cart-item-name">${item.name}</div>
+                                <div class="cart-item-price">${formatPrice(item.price)}</div>
+                            </div>
+                            <div class="cart-item-actions">
+                                <span class="cart-qty">${item.quantity}</span>
+                                <button class="remove-btn" data-id="${item.id}">✕</button>
+                            </div>
+                        </li>
+                    `;
+                });
+                listElement.innerHTML = html;
+                // Añadir eventos a botones de eliminar dentro de este contenedor
+                listElement.querySelectorAll('.remove-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const id = btn.dataset.id;
+                        removeFromCart(id);
+                    });
+                });
+            }
+        }
+
+        // Enviar WhatsApp
+        function sendWhatsAppOrder() {
+            const cartArray = getCartArray();
+            if (cartArray.length === 0) {
+                alert('Agrega algunos productos al carrito antes de enviar.');
+                return;
+            }
+
+            const total = cartArray.reduce((acc, i) => acc + (i.price * i.quantity), 0);
+            let message = '🍖 *Nuevo pedido - Carnitas El Padrino* 🍖\n\n';
+            cartArray.forEach(item => {
+                message += `• ${item.name} x${item.quantity} = ${formatPrice(item.price * item.quantity)}\n`;
+            });
+            message += `\n📌 *TOTAL: ${formatPrice(total)}*`;
+            message += `\n\n📍 Dirección: Irolo esq. Bretaña, Col. Portales (para recoger)`;
+            message += `\n⏰ Horario: Mar-Dom 9am-5pm`;
+            message += `\n\nGracias por tu orden. ¡Te esperamos!`;
+
+            const phone = '525534326476';
+            const encoded = encodeURIComponent(message);
+            const url = `https://wa.me/${phone}?text=${encoded}`;
+            window.open(url, '_blank');
+        }
+
+        // Manejo del drawer móvil
+        function openDrawer() {
+            cartDrawer.classList.add('open');
+            drawerOverlay.classList.add('show');
+        }
+
+        function closeDrawer() {
+            cartDrawer.classList.remove('open');
+            drawerOverlay.classList.remove('show');
+        }
+
+        // Event listeners
+        cartFab.addEventListener('click', openDrawer);
+        closeDrawerBtn.addEventListener('click', closeDrawer);
+        drawerOverlay.addEventListener('click', closeDrawer);
+
+        sendBtnDesktop.addEventListener('click', sendWhatsAppOrder);
+        sendBtnDrawer.addEventListener('click', sendWhatsAppOrder);
+
+        // Inicializar
+        renderMenu();
+        updateAllCarts();
+    })();
+</script>
+</body>
+</html>
